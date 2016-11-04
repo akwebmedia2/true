@@ -1,0 +1,69 @@
+﻿<ion-view>
+	<ion-content has-header="true" padding="true">
+
+		
+        <div class="row">
+        	<div class="col"> <div class="card">
+  <div class="item item-divider">
+   Total Open Tickets
+  </div>
+  <div class="item item-text-wrap" style="text-align:center">
+  {{reportsData.openTickets}}
+  </div>
+ 
+</div></div>
+
+<div class="col"> <div class="card">
+  <div class="item item-divider">
+  Pending Tickets
+  </div>
+  <div class="item item-text-wrap" style="text-align:center">
+   {{reportsData.PendingTickets}}
+  </div>
+ 
+</div></div>
+
+        </div>
+        
+        <div class="row">
+        	<div class="col"> <div class="card">
+  <div class="item item-divider">
+   Total Closed Tickets
+  </div>
+  <div class="item item-text-wrap" style="text-align:center">
+   {{reportsData.closedTickets}}
+  </div>
+ 
+</div></div>
+
+<div class="col"> <div class="card">
+  <div class="item item-divider">
+ Total Orders
+  </div>
+  <div class="item item-text-wrap" style="text-align:center">
+ {{reportsData.sparePart}}
+  </div>
+ 
+</div></div>
+
+        </div>
+        
+       
+        
+		
+        
+        <div class="row" style="background:#FFF">
+				 <div id='myChart'></div>
+			</div>
+        
+		
+		
+		
+	</ion-content>
+</ion-view>
+<style type="text/css">
+	.marginBot0 {
+		margin-bottom:0px !important;
+		padding:0px !important
+	}
+</style>

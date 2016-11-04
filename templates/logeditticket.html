@@ -1,0 +1,441 @@
+﻿<ion-view>
+	<ion-content has-header="true" delegate-handle="myScroll" padding="true">
+
+		<!-- <p ng-bind="ticketform.u_additional_comment_mobile" style="white-space: pre;"></p> -->
+		<form name="newticketform" id="newticketform" novalidate="novalidate"  on-valid-submit="doLogin()" class="marginTop0">
+			<div class="list">
+				<div class="item item-form-divider item-icon-right" ng-init="show_section.ticketinformation = true" ng-click="section_click('ticketinformation')">
+					<h2>Ticket Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.ticketinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.ticketinformation"></i>
+				</div>
+				<div ng-show="show_section.ticketinformation" class="item removeanypadding">
+
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Number</span>
+								<input ng-model="ticketform.number" type="text" readonly />
+								<input ng-model="ticketform.sys_id" class="hideElement" type="text" />
+							</label>
+							<label class="item item-input item-stacked-label"> <span class="input-label">Opened By</span>
+								<input ng-model="ticketform['opened_by.name']" type="text" readonly />
+							</label>
+							<label class="item item-input item-stacked-label"> <span class="input-label">Assignment Group</span>
+								<input readonly ng-model="ticketform['assignment_group.name']" type="text" />
+							</label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-select item-select-break selectBreakHt">
+								<div class="input-label">
+									Status
+								</div>
+								<select data-ng-model='ticketform.u_status' ng-disabled="!isEditTicket || !ticketform.number.length > 0">
+									<option value="Open">Open</option>
+									<option value="Work in progress">Work in progress</option>
+									<option value="Closed">Closed</option>
+								</select> </label>
+							<label class="item item-input item-select item-select-break selectBreakHt">
+								<div class="input-label">
+									SRC Support
+								</div>
+								<select data-ng-model='ticketform.u_src_solved' ng-disabled="!isEditTicket || !ticketform.number.length > 0" >
+									<option value="" selected>-- Select --</option>
+									<option>Yes</option>
+									<option>No</option>
+								</select> </label>
+							
+						</div>
+					</div><!--End of Row -->
+					<div class="row responsive-lg">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Asset Number</span>
+								<input readonly="readonly" type="text" ng-model="ticketform.u_asset_number">
+							</label>
+						</div>
+						<div class="col" style="margin-bottom:0px; padding:0px;"></div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Short Description</span> 								<textarea data-ng-model='ticketform.u_short_description' rows="6"  ng-disabled="!isEditTicket || !ticketform.number.length > 0"></textarea></label>
+							<label class="item item-input item-stacked-label"> <span class="input-label">Description</span> <span style="background:#f8f8f8; white-space:normal!important; display:block; padding:5px; font-size:15px;">{{ticketform.description}}</span> </label>
+							<!--<label class="item item-input item-stacked-label"> <span class="input-label">Description</span>
+							<textarea data-ng-model='ticketform.description' rows="6" readonly="true" ng-disabled="!isEditTicket || !ticketform.number.length > 0">
+							</textarea> </label> -->
+                            
+                             <label class="item item-input item-stacked-label"> <span class="input-label">Service Report</span> 
+                    <textarea  placeholder="" data-ng-model='ticketform.u_service_report' rows="2" ng-disabled="!showServiceReport"> 
+							</textarea> </label>
+						</div>
+					</div>
+
+					
+
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('defectinformation')">
+					<h2>Defect Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.defectinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.defectinformation"></i>
+				</div>
+				<div ng-show="show_section.defectinformation" class="item removeanypadding">
+					<!-- <div class="row"> -->
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								1. Effected Module
+							</div>
+							<select ng-disabled="!u_defect_category1s || u_defect_category1s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category1" ng-change="onEffectedModuleChange(ticketform.u_defect_category1)" data-ng-options="item as item.currentItem.u_defect_category1 for item in u_defect_category1s" required="required">
+								<option value="">-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1','ticketform.u_defect_category2')"  class="item item-input item-select item-select-break">
+							<div class="input-label">
+								1. Component
+							</div>
+							<select ng-disabled="!u_defect_category2s || u_defect_category2s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category2" ng-change='onComponentChange(ticketform.u_defect_category2)' data-ng-options='item as item.currentItem.u_defect_category2 for item in u_defect_category2s' required="required" >
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1','ticketform.u_defect_category3')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								1. Defect
+							</div>
+							<select ng-disabled="!u_defect_category3s || u_defect_category3s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category3" ng-change='onDefectChange(ticketform.u_defect_category3)' data-ng-options='item as item.currentItem.u_defect_category3 for item in u_defect_category3s' required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+					<div class="sep"></div>
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								2. Effected Module
+							</div>
+							<select ng-disabled="!u_defect_category1s || u_defect_category1s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category1_2" ng-change="onEffectedModuleChange2(ticketform.u_defect_category1_2)" data-ng-options="item as item.currentItem.u_defect_category1 for item in u_defect_category1s" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_2','ticketform.u_defect_category2_2')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								2. Component
+							</div>
+							<select ng-disabled="!u_defect_category2_2s || u_defect_category2_2s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category2_2" ng-change="onComponentChange2(ticketform.u_defect_category2_2)" data-ng-options="item as item.currentItem.u_defect_category2 for item in u_defect_category2_2s" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_2','ticketform.u_defect_category3_2')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								2. Defect
+							</div>
+							<select ng-disabled="!u_defect_category3_2s || u_defect_category3_2s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category3_2" ng-change="onDefectChange2(ticketform.u_defect_category3_2)" data-ng-options="item as item.currentItem.u_defect_category3 for item in u_defect_category3_2s" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+					<div class="sep"></div>
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								3. Effected Module
+							</div>
+							<select ng-disabled="!u_defect_category1s || u_defect_category1s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category1_3" ng-change="onEffectedModuleChange3(ticketform.u_defect_category1_3)" data-ng-options="item as item.currentItem.u_defect_category1 for item in u_defect_category1s" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_3','ticketform.u_defect_category2_3')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								3. Component
+							</div>
+							<select  ng-disabled="!u_defect_category2_2s3 || u_defect_category2_2s3.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category2_3" ng-change="onComponentChange3(ticketform.u_defect_category2_3)" data-ng-options="item as item.currentItem.u_defect_category2 for item in u_defect_category2_2s3" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_3','ticketform.u_defect_category3_3')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								3. Defect
+							</div>
+							<select ng-disabled="!u_defect_category3_2s3 || u_defect_category3_2s3.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category3_3" ng-change="onDefectChange3(ticketform.u_defect_category3_3)" data-ng-options="item as item.currentItem.u_defect_category3 for item in u_defect_category3_2s3" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+					<div class="sep"></div>
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								4. Effected Module
+							</div>
+							<select ng-disabled="!u_defect_category1s || u_defect_category1s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category1_4" ng-change="onEffectedModuleChange4(ticketform.u_defect_category1_4)" data-ng-options="item as item.currentItem.u_defect_category1 for item in u_defect_category1s" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_4','ticketform.u_defect_category2_4')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								4. Component
+							</div>
+							<select ng-disabled="!u_defect_category2_2s4 || u_defect_category2_2s4.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category2_4" ng-change="onComponentChange4(ticketform.u_defect_category2_4)" data-ng-options="item as item.currentItem.u_defect_category2 for item in u_defect_category2_2s4" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_4','ticketform.u_defect_category3_4')"  class="item item-input item-select item-select-break">
+							<div class="input-label">
+								4. Defect
+							</div>
+							<select  ng-disabled="!u_defect_category3_2s4 || u_defect_category3_2s4.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category3_4" ng-change="onDefectChange4(ticketform.u_defect_category3_4)" data-ng-options="item as item.currentItem.u_defect_category3 for item in u_defect_category3_2s4" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+					<div class="sep"></div>
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								5. Effected Module
+							</div>
+							<select ng-disabled="!u_defect_category1s || u_defect_category1s.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category1_5" ng-change="onEffectedModuleChange5(ticketform.u_defect_category1_5)" data-ng-options="item as item.currentItem.u_defect_category1 for item in u_defect_category1s" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_5','ticketform.u_defect_category2_5')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								5. Component
+							</div>
+							<select ng-disabled="!u_defect_category2_2s5 || u_defect_category2_2s5.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category2_5" ng-change="onComponentChange5(ticketform.u_defect_category2_5)" data-ng-options="item as item.currentItem.u_defect_category2 for item in u_defect_category2_2s5" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+						<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1_5','ticketform.u_defect_category3_5')" class="item item-input item-select item-select-break">
+							<div class="input-label">
+								5. Defect
+							</div>
+							<select ng-disabled="!u_defect_category3_2s5 || u_defect_category3_2s5.length == 0 || !isEditTicket || !ticketform.number.length > 0" ng-model="ticketform.u_defect_category3_5" ng-change="onDefectChange5(ticketform.u_defect_category3_5)" data-ng-options="item as item.currentItem.u_defect_category3 for item in u_defect_category3_2s5" required="required">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+
+					<!-- </div> -->
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('customerinformation')">
+					<h2>Customer Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.customerinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.customerinformation"></i>
+				</div>
+				<div ng-show="show_section.customerinformation"  class="item removeanypadding">
+
+					<!-- <div class="row responsive-md"> -->
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								City
+							</div>
+							<select data-ng-model='ticketform.u_city' disabled>
+								<option selected>{{ticketform.u_city}}</option>
+							</select> </label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">State</span>
+							<input data-ng-model='ticketform.u_state' disabled type="text">
+						</label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Ship to
+							</div>
+							<select data-ng-model='ticketform.u_ship_sold_to' disabled>
+								<option selected>{{ticketform.u_ship_sold_to}}</option>
+							</select> </label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Account Name</span>
+							<input data-ng-model='ticketform.u_account_name' disabled  type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Region</span>
+							<input data-ng-model='ticketform.u_region' disabled  type="text">
+						</label>
+					</div>
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label">Sales Org</span>
+							<input data-ng-model='ticketform.u_salesorg' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">SalesDistrict ID</span>
+							<input data-ng-model='ticketform.u_salesdistrictid' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">SalesRegion ID</span>
+							<input data-ng-model='ticketform.u_salesregionid' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Customer Street</span>
+							<input data-ng-model='ticketform.u_customer_street' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Asset Class</span>
+							<input  data-ng-model='ticketform.u_assetclass' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Market Sector</span>
+							<input  data-ng-model='ticketform.u_market_sector' disabled type="text">
+						</label>
+
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('equipmentinformation')">
+					<h2>Equipment Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.equipmentinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.equipmentinformation"></i>
+				</div>
+				<div ng-show="show_section.equipmentinformation" class="item removeanypadding">
+					<!-- <div class="row responsive-md"> -->
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label">System Name</span>
+							<input data-ng-model='ticketform.u_master_asset_tag_no' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Controller type</span>
+							<input data-ng-model='ticketform.u_controller_type' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Electronics Serial No</span>
+							<input data-ng-model='ticketform.u_cam_serial_no' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Fluidics Serial No</span>
+							<input data-ng-model='ticketform.u_fluidics_serial_no' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Controller Serial No</span>
+							<input data-ng-model='ticketform.u_controller_serial_id' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">ICC Skid Serial No</span>
+							<input data-ng-model='ticketform.u_icc_skid_serial_no' disabled type="text">
+						</label>
+
+						<label class="item item-input item-select item-select-breakr">
+							<div class="input-label">
+								Operational Status
+							</div>
+							<select data-ng-model='ticketform.u_operational_status' disabled>
+
+								<option value="">-- Select --</option>
+								<option value="In Service">In Service</option>
+								<option value="New">New</option>
+								<option value="To Be Commissioned">To Be Commissioned</option>
+								<option value="refurbishing">refurbishing</option>
+								<option value="Storage">Storage</option>
+								<option value="Lost">Lost</option>
+								<option value="Scrapped">Scrapped</option>
+								<option value="Moved">Moved</option>
+								<option value="Demo">Demo</option>
+
+							</select> </label>
+					</div>
+					<div class="col">
+						<div class="row">
+							<div class="col">
+								<span class="item item-checkbox"> <label class="checkbox">
+										<input disabled type="checkbox" ng-model="ticketform.u_hardware_kits" ng-checked="{{ticketform.u_hardware_kits}}">
+									</label> Hardware kits </span>
+							</div>
+							<div class="col">
+								<span class="item item-checkbox"> <label class="checkbox">
+										<input disabled type="checkbox" ng-model="ticketform.u_ethernet_kits" ng-checked="{{ticketform.u_ethernet_kits}}">
+									</label> Ethernet kits</span>
+							</div>
+						</div>
+
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								CAM Firmware Rev
+							</div>
+							<select data-ng-model='ticketform.u_ts2_firmware_rev' disabled>
+								<option value="">-- Select --</option>
+								<option value="1.04">1.04</option>
+								<option value="1.06">1.06</option>
+								<option value="1.07">1.07</option>
+								<option value="1.08">1.08</option>
+								<option value="1.08">1.09</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Temperature C or F
+							</div>
+							<select data-ng-model='ticketform.u_temperature_c_or_f' disabled>
+								<option value="">-- Select --</option>
+								<option value="No">No</option>
+								<option value="C">C</option>
+								<option value="F">F</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								CM Firmware Rev
+							</div>
+							<select data-ng-model='ticketform.u_mrc__psc_firmware_rev' disabled>
+								<option value="">-- Select --</option>
+								<!--<option value="01.03.30">01.03.30</option>
+								<option value="01.03.35">01.03.35</option>
+								<option value="1.03.030">1.03.030</option>
+								<option value="1.03.033">1.03.033</option>-->
+								<option value="1.03.035">1.03.035</option>
+								<!--<option value="Aquatrac">Aquatrac</option>
+								<option value="Previous">Previous</option>-->
+								<option value="1.03.037">1.03.037</option>
+							</select> </label>
+
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Date of Upgrade</span>
+							<input disabled ng-model="ticketform.u_date_of_upgrade" type="date">
+						</label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Control Status
+							</div>
+							<select data-ng-model='ticketform.u_control_status' disabled>
+								<option value="">-- Select --</option>
+								<option value="Control">Control</option>
+								<option value="Monitoring">Monitoring</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Cooler Option
+							</div>
+							<select data-ng-model='ticketform.u_fluidic_cooler_option' disabled>
+								<option value="">-- Select --</option>
+								<option value="no">No</option>
+								<option value="yes">Yes Original</option>
+								<option value="retrofit">Yes with Retrofit</option>
+							</select> </label>
+
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								DCS Connection
+							</div>
+							<select disabled="disabled"  ng-model="ticketform.u_dsc_true_connection" ng-options="option.value as option.label for option in dcsConnectionVal">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+					<!-- </div> -->
+				</div>
+
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('incident')">
+					<h2>Incident</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.incident"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.incident"></i>
+				</div>
+				<div ng-show="show_section.incident"  class="item removeanypadding">
+					<div class="row responsive-lg">				
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Issue End Date</span>
+								<input data-ng-model='ticketform.u_issue_end_date' type="date" ng-disabled="!isEditTicket || !ticketform.number.length > 0" >
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('notes')">
+					<h2>Notes and Activity</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.notes"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.notes"></i>
+				</div>
+				<div ng-show="show_section.notes"  class="item removeanypadding">
+					<div class="row responsive-lg">
+						<div class="col">
+							<!--<label class="item item-input item-stacked-label"> <span class="input-label">Notes</span>
+							<textarea data-ng-model='ticketform.work_notes' rows="6"  disabled>
+							</textarea> </label> -->
+							<label class="item item-input item-stacked-label"> <span class="input-label">Additional Comments</span> 								<textarea data-ng-model='ticketform.additionalComments' rows="6" ng-disabled="!ticketform.number.length > 0"> 
+							</textarea> </label>
+							<br />
+							<label class="item item-input item-stacked-label"> <span class="input-label">Additional Comment Activity</span> <p ng-bind="ticketform.u_additional_comment_mobile" style="white-space: pre;"></p> </label>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div ng-if="allowticketform.enableUpdate" align="center">
+				<div class="row">
+					<div ng-if="ticketform.number" class="col" ng-init="status = ticketform.u_status">
+						<button type="submit" ng-click="ticketSubmit()" class="button button-small button-positive button-same-size" style="margin-top:15px">
+							Update
+						</button>
+						<button type="submit" ng-if="(status == 'Open' || status == 'Work in progress') && isEditTicket == true && visibleEscalateBtn == true" ng-click="ticketSubmit('escalate')" class="button button-small button-positive" style="padding:7px; margin-top:15px">
+							Escalate to Next Level
+						</button>
+						<button ng-click="ticketCancel()" class="button button-small button-positive button-same-size"  style="margin-top:15px">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

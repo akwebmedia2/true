@@ -1,0 +1,994 @@
+﻿<ion-view>
+	<ion-content has-header="true" delegate-handle="myScroll" padding="true">
+		<div id="openTicketCheckPhone" class="show-for-small-down"></div>
+      
+		<form name="orderSparePart" id="orderSparePart" novalidate="novalidate"  on-valid-submit="doOrderSparePart()">
+			<div align="right">
+		 
+       
+        		<button ng-if="orderSpareParts.isUploadedSparePart == 'true' && orderSpareParts.onViewSpareParts != 'true'" ng-click="onShowViewSpareParts()" class="button button-small button-positive paddingTenMarTen">
+					View Spare Part
+				</button>
+				<button ng-if="orderSpareParts.onViewSpareParts == 'true' && orderSpareParts.isUploadedSparePart == 'true'" ng-click="onHideViewSpareParts()" class="button button-small button-positive paddingTenMarTen">
+					Hide Spare Part
+				</button>
+                
+                  
+
+				<div ng-if="orderSpareParts.onViewSpareParts == 'true'" align="left" class="list">
+					<div class="item item-form-divider item-icon-right">
+						<h2>View Order Spare Part</h2>
+					</div>
+					<div class="item removeanypadding">
+						<div class="sep"></div>
+						<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('vsparepart')">
+							<h2>Replacement Parts</h2>
+							<i class="icon ion-ios7-plus-outline" ng-hide="show_section.vsparepart"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.vsparepart"></i>
+						</div>
+						<div ng-show="show_section.vsparepart" class="removeanypadding marginTen">
+							<div class="paddingTen">
+								<div ng-show="vspareParts.u_1_component && vspareParts.u_1_component.length > 0" class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+											<input readonly="readonly" value="{{vspareParts.u_1_component}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Part Description
+											<input readonly="readonly" value="{{vspareParts.u_1_spare_part}}"  type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input readonly="readonly" value="{{vspareParts.u_1_sap_part__}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input value="{{vspareParts.u_1_quantity}}" readonly="readonly" type="text">
+										</label>
+									</div>
+								</div>
+
+								<div ng-show="vspareParts.u_2_component && vspareParts.u_2_component.length > 0" class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+											<input readonly="readonly" value="{{vspareParts.u_2_component}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Part Description
+											<input readonly="readonly" value="{{vspareParts.u_2_spare_part}}"  type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input readonly="readonly" value="{{vspareParts.u_2_sap_part__}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input value="{{vspareParts.u_2_quantity}}" readonly="readonly" type="text">
+										</label>
+									</div>
+								</div>
+
+								<div ng-show="vspareParts.u_3_component && vspareParts.u_3_component.length > 0" class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+											<input readonly="readonly" value="{{vspareParts.u_3_component}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Part Description
+											<input readonly="readonly" value="{{vspareParts.u_3_spare_part}}"  type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input readonly="readonly" value="{{vspareParts.u_3_sap_part__}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input value="{{vspareParts.u_3_quantity}}" readonly="readonly" type="text">
+										</label>
+									</div>
+								</div>
+
+								<div ng-show="vspareParts.u_4_component && vspareParts.u_4_component.length > 0" class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+											<input readonly="readonly" value="{{vspareParts.u_4_component}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Part Description
+											<input readonly="readonly" value="{{vspareParts.u_4_spare_part}}"  type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input readonly="readonly" value="{{vspareParts.u_4_sap_part__}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input value="{{vspareParts.u_4_quantity}}" readonly="readonly" type="text">
+										</label>
+									</div>
+								</div>
+
+								<div ng-show="vspareParts.u_5_component && vspareParts.u_5_component.length > 0" class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+											<input readonly="readonly" value="{{vspareParts.u_5_component}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Part Description
+											<input readonly="readonly" value="{{vspareParts.u_5_spare_part}}"  type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input readonly="readonly" value="{{vspareParts.u_5_sap_part__}}" type="text">
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input value="{{vspareParts.u_5_quantity}}" readonly="readonly" type="text">
+										</label>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('vadditionalsp')">
+							<h2>Additional Replacement Part</h2>
+							<i class="icon ion-ios7-plus-outline" ng-hide="show_section.vadditionalsp"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.vadditionalsp"></i>
+						</div>
+						<div ng-show="show_section.vadditionalsp" class="removeanypadding marginTen">
+							<div class="row responsive-lg">
+								<div class="col marginBot0">
+									<div class="list">
+										<label class="item item-input item-stacked-label"> Part Description
+											<input type="text" readonly="readonly" value="{{vspareParts.u_sap_part___add}}" />
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input type="text" readonly="readonly" value="{{vspareParts.u_spare_part_add}}" />
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input readonly="" value="{{vspareParts.u_quantity_add}}" type="text" />
+										</label>
+									</div>
+								</div>
+							</div>
+                            
+                            <!--2nd-->
+							<div class="paddingTen" ng-show="vspareParts.u_sap_part_desc_2 && vspareParts.u_sap_part_desc_2.length > 0" style="padding-bottom:0px!important">
+								<div class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<div class="row">
+											<div class="col marginBot0">
+												<div class="list">
+													<label class="item item-input item-stacked-label"> Part Description
+														<input type="text" readonly="readonly" value="{{vspareParts.u_sap_part_desc_2}}" />
+													</label>
+													<label class="item item-input item-stacked-label"> Spare Part Number
+														<input type="text" readonly="readonly" value="{{vspareParts.u_sap_part_num_2}}" />
+													</label>
+													<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+														<input readonly="" value="{{vspareParts.u_sap_part_qty_2}}" type="text" />
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--3rd-->
+							<div class="paddingTen" ng-show="vspareParts.u_sap_part_desc_3 && vspareParts.u_sap_part_desc_3.length > 0" style="padding-top:0px!important" >
+								<div class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<div class="row">
+											<div class="col marginBot0">
+												<div class="list">
+										<label class="item item-input item-stacked-label"> Part Description
+											<input type="text" readonly="readonly" value="{{vspareParts.u_sap_part_desc_3}}" />
+										</label>
+										<label class="item item-input item-stacked-label"> Spare Part Number
+											<input type="text" readonly="readonly" value="{{vspareParts.u_sap_part_num_3}}" />
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+											<input readonly="" value="{{vspareParts.u_sap_part_qty_3}}" type="text" />
+										</label>
+									</div>
+								</div>
+							</div>
+                            </div>
+								</div>
+							</div>
+                            
+                            
+						</div>
+						<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('vshippingdetails')">
+							<h2>Shipping Details</h2>
+							<i class="icon ion-ios7-plus-outline" ng-hide="show_section.vshippingdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.vshippingdetails"></i>
+						</div>
+						<div ng-show="show_section.vshippingdetails" class="removeanypadding marginTen">
+							<div class="row responsive-lg">
+								<div class="col marginBot0">
+									<div class="list">
+										<label class="item item-input item-stacked-label"> <span class="input-label">Ship To</span>
+											<input type="text" readonly="readonly" value='{{vspareParts.u_ship_to}}' />
+										</label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">Delivery Address and notes</span> 											<textarea readonly="readonly" rows="4" cols="5">{{vspareParts.u_delivery_address}}</textarea> </label>
+										<label class="item item-input item-stacked-label"> <span class="input-label">CSC Email Address</span>
+											<input readonly="readonly" value='{{vspareParts.u_csc_mail_address}}' type="text" />
+										</label>
+
+										<label class="item item-input item-stacked-label"> <span class="input-label">Additional Email ID</span>
+											<input readonly="readonly" value="{{vspareParts.u_email}}" type="email" />
+										</label>
+
+										<li class="item item-checkbox">
+											<label class="checkbox">
+												<input onclick="return false" ng-model="vspareParts.u_critical" ng-checked="{{vspareParts.u_critical}}" type="checkbox">
+											</label>
+											Critical
+										</li>
+										<label class="item item-input item-stacked-label"> <span class="input-label">*Expected Delivery Date</span>
+											<input disabled="disabled" value='{{vspareParts.u_expected_date}}' type="text" />
+										</label>
+										<label class="item item-input item-stacked-label"> Order Status
+											<input readonly="readonly" value="{{vspareParts.u_order_status}}" type="text" />
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('sapdetails')">
+							<h2>SAP Details</h2>
+							<i class="icon ion-ios7-plus-outline" ng-hide="show_section.sapdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.sapdetails"></i>
+						</div>
+						<div ng-show="show_section.sapdetails" class="removeanypadding marginTen">
+							<div class="row responsive-lg">
+								<div class="col marginBot0">
+									<label class="item item-input item-stacked-label">Sales Order Number
+										<input readonly="readonly" value="{{vspareParts.u_sales_order_number}}" type="text">
+									</label>
+
+								</div>
+								<div class="col">
+									<label class="item item-input item-stacked-label">Confirmed Delivery Date
+										<input readonly="readonly" value="{{vspareParts.u_confirmed_delivery_date}}"  type="text">
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div align="center" class="margin30"></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="orderSpareParts.isUploadedSparePart == 'false'">
+				<div  align="right">
+                
+              
+					<button ng-if="orderSpareParts.sparePartButton == 'true' && orderSpareParts.sparePartButtonHide != 'true'" ng-click="orderSparePartDefectItems()" class="button button-small button-positive paddingTenMarTen">
+						Order Spare Part
+					</button>
+					<button ng-if="orderSpareParts.sparePartButtonHide == 'true' && orderSpareParts.sparePartButton == 'true'" ng-click="hideSparePartDefectItems()" class="button button-small button-positive paddingTenMarTen">
+						Hide Spare Part
+					</button>
+                    
+                
+					<div ng-if="orderSpareParts.sparePartButtonHide == 'true'" align="left">
+						<div ng-if="orderSpareParts.isUploadedSparePart == 'false'" class="list">
+							<div class="item item-form-divider item-icon-right">
+								<h2>Order Spare Part</h2>
+							</div>
+							<div class="item removeanypadding">
+								<div class="sep"></div>
+								<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('sparepart')">
+									<h2>Replacement Parts</h2>
+									<i class="icon ion-ios7-plus-outline" ng-hide="show_section.sparepart"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.sparepart"></i>
+								</div>
+								<div ng-show="show_section.sparepart" class="removeanypadding achierarHead">
+									<div class="paddingTen">
+										<div ng-show="closedTicketForm.u_defect_category2 && closedTicketForm.u_defect_category2.length > 0" class="col lightGreyPadMar">
+											<div class="list whiteBg">
+												<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+													<input readonly="readonly" value="{{closedTicketForm.u_defect_category2}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Part Description
+													<input readonly="readonly" ng-bind="spareParts.u_1_spare_part" value="{{spareParts.u_1_spare_part}}"  type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Spare Part Number
+													<input readonly="readonly" ng-bind="spareParts.u_1_sap_part__" value="{{spareParts.u_1_sap_part__}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_1_quantity" ng-init="spareParts.u_1_quantity = 0" type="number" max="99">
+												</label>
+											</div>
+										</div>
+
+										<div ng-show="closedTicketForm.u_defect_category2_2 && closedTicketForm.u_defect_category2_2.length > 0" class="col lightGreyPadMar">
+											<div class="list whiteBg">
+												<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+													<input readonly="readonly" value="{{closedTicketForm.u_defect_category2_2}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Part Description
+													<input readonly="readonly" ng-bind="spareParts.u_2_spare_part" value="{{spareParts.u_2_spare_part}}"  type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Spare Part Number
+													<input readonly="readonly" ng-bind="spareParts.u_2_sap_part__" value="{{spareParts.u_2_sap_part__}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_2_quantity" ng-init="spareParts.u_2_quantity = 0" type="number" max="99">
+												</label>
+											</div>
+										</div>
+
+										<div ng-show="closedTicketForm.u_defect_category2_3 && closedTicketForm.u_defect_category2_3.length > 0" class="col lightGreyPadMar">
+											<div class="list whiteBg">
+												<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+													<input readonly="readonly" value="{{closedTicketForm.u_defect_category2_3}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Part Description
+													<input readonly="readonly" ng-bind="spareParts.u_3_spare_part" value="{{spareParts.u_3_spare_part}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Spare Part Number
+													<input readonly="readonly" ng-bind="spareParts.u_3_sap_part__" value="{{spareParts.u_3_sap_part__}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_3_quantity" ng-init="spareParts.u_3_quantity = 0" type="number" max="99">
+												</label>
+											</div>
+										</div>
+
+										<div ng-show="closedTicketForm.u_defect_category2_4 && closedTicketForm.u_defect_category2_4.length > 0" class="col lightGreyPadMar">
+											<div class="list whiteBg">
+												<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+													<input readonly="readonly" value="{{closedTicketForm.u_defect_category2_4}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Part Description
+													<input readonly="readonly" ng-bind="spareParts.u_4_spare_part" value="{{spareParts.u_4_spare_part}}"  type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Spare Part Number
+													<input readonly="readonly" ng-bind="spareParts.u_4_sap_part__" value="{{spareParts.u_4_sap_part__}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_4_quantity" ng-init="spareParts.u_4_quantity = 0" type="number" max="99">
+												</label>
+											</div>
+										</div>
+										<div ng-show="closedTicketForm.u_defect_category2_5 && closedTicketForm.u_defect_category2_5.length > 0" class="col lightGreyPadMar">
+											<div class="list whiteBg">
+												<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+													<input readonly="readonly" value="{{closedTicketForm.u_defect_category2_5}}" type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Part Description
+													<input readonly="readonly" ng-bind="spareParts.u_5_spare_part" value="{{spareParts.u_5_spare_part}}"  type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> Spare Part Number
+													<input readonly="readonly" ng-bind="spareParts.u_5_sap_part__" value="{{spareParts.u_5_sap_part__}}"  type="text">
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_5_quantity" ng-init="spareParts.u_5_quantity = 0" type="number" max="99">
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item item-form-divider item-icon-right marginFive"  ng-click="section_click('additionalsp')">
+									<h2>Additional Replacement Part</h2>
+									<i class="icon ion-ios7-plus-outline" ng-hide="show_section.additionalsp"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.additionalsp"></i>
+								</div>
+								<div ng-show="show_section.additionalsp" class="removeanypadding marginTen">
+									<div class="row responsive-lg">
+										<div class="col marginBot0">
+											<div class="list">
+												<label class="item item-input item-select item-select-break">
+													<div class="input-label">
+														Part Description
+													</div>
+													<select data-ng-model='u_spare_parts' ng-init="spareParts.u_replacement_part_text = ''" ng-change='onAdditionalSparePartChange(u_spare_parts)' data-ng-options="item as item.u_replacement_part_text for item in uniquedefectList | orderBy:'u_replacement_part_text'">
+														<option value="" selected>-- Select --</option>
+													</select> </label>
+												<label class="item item-input item-stacked-label">
+													<div class="input-label">
+														Spare Part Number
+													</div>
+													<input type="text" readonly="readonly" ng-init="spareParts.u_spare_part_add = ''" data-ng-model='spareParts.u_spare_part_add' value="{{spareParts.u_spare_part_add}}" />
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_quantity_add" ng-init="spareParts.u_quantity_add = 0" type="number" max="99" />
+												</label>
+											</div>
+										</div>
+									</div>
+                                    
+                    <div id="space-for-buttons2"></div>
+									<div id="space-for-buttons3"></div>
+
+									<div align="center" class="row col  marginBot30">
+										<addadditionalspare></addadditionalspare>
+										<removeadditional></removeadditional>
+									</div>
+                                    
+								</div>
+								<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('shippingdetails')">
+									<h2>Shipping Details</h2>
+									<i class="icon ion-ios7-plus-outline" ng-hide="show_section.shippingdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.shippingdetails"></i>
+								</div>
+								<div ng-show="show_section.shippingdetails" class="removeanypadding marginTen">
+									<div class="row responsive-lg">
+										<div class="col marginBot0">
+											<div class="list">
+												<label class="item item-input item-stacked-label"> <span class="input-label">Ship To</span>
+													<input type="text" ng-model="spareParts.u_ship_to" readonly="readonly" value='{{spareParts.u_ship_to}}' />
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Delivery Address and notes </span> 													<textarea rows="4" cols="5" ng-model="spareParts.u_delivery_address"></textarea> </label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">CSC Email Address</span>
+													<input readonly="readonly" ng-model="spareParts.u_csc_mail_address" value='{{spareParts.u_csc_mail_address}}' type="text" />
+												</label>
+
+												<label class="item item-input item-stacked-label"> <span class="input-label">Additional Email ID</span>													
+                                                     <input ng-model="spareParts.u_email" type="email" validate-email id="email">
+												</label>
+
+												<li class="item item-checkbox">
+													<label class="checkbox">
+														<input ng-model="spareParts.u_critical" ng-change="onSparePartCritical(spareParts.u_critical)" type="checkbox">
+													</label>
+													Critical
+												</li>
+
+												<label class="item item-input item-stacked-label"> <span class="input-label">*Expected Delivery Date</span>
+													<input ng-disabled="spareParts.u_critical" ng-model="spareParts.u_expected_date" value='{{spareParts.u_expected_date}}' type="date" />
+												</label>
+												<label class="item item-input item-select item-select-break">
+													<div class="input-label">
+														Order Status
+													</div>
+													<select ng-disabled='true' data-ng-model='spareParts.u_order_status'>
+														<!--<select ng-disabled='true' disabled="disabled"  data-ng-model='spareParts.u_order_status'>-->
+														<option value="new">New</option>
+														<option value="ordered">Ordered</option>
+														<option value="delivered">Delivered</option>
+													</select> </label>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('sapdetails')">
+									<h2>SAP Details</h2>
+									<i class="icon ion-ios7-plus-outline" ng-hide="show_section.sapdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.sapdetails"></i>
+								</div>
+								<div ng-show="show_section.sapdetails" class="removeanypadding marginTen">
+									<div class="row responsive-lg">
+										<div class="col marginBot0">
+											<label class="item item-input item-stacked-label">Sales Order Number
+												<input readonly="readonly" ng-bind="closedTicketForm.u_sales_order_number" value="{{closedTicketForm.u_sales_order_number}}" type="text">
+											</label>
+
+										</div>
+										<div class="col">
+											<label class="item item-input item-stacked-label">Confirmed Delivery Date
+												<input readonly="readonly" ng-bind="closedTicketForm.u_confirmed_delivery_date" value="{{closedTicketForm.u_confirmed_delivery_date}}"  type="text">
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<div align="center" class="margin30">
+									<div class="row">
+										<div class="col">
+											<button ng-click="onSparePartsUpload()" class="button button-small button-positive button-same-size">
+												Place Order
+											</button>
+											<!--
+											<button ng-click="onSparePartsUploadCancel()" class="button button-small button-positive button-same-size">
+											Cancel
+											</button>-->
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sep"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+
+		<!-- <p ng-bind="closedTicketForm.u_additional_comment_mobile" style="white-space: pre;"></p> -->
+		<form name="newticketform" id="newticketform" novalidate="novalidate"  on-valid-submit="doLogin()" class="marginTop0">
+			<div class="list">
+				<div class="item item-form-divider item-icon-right" ng-init="show_section.ticketinformation = true" ng-click="section_click('ticketinformation')">
+					<h2>Ticket Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.ticketinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.ticketinformation"></i>
+				</div>
+				<div ng-show="show_section.ticketinformation" class="item removeanypadding">
+
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Number</span>
+								<input ng-model="closedTicketForm.number" type="text" readonly />
+								<input ng-model="closedTicketForm.sys_id" class="hideElement" type="text" />
+							</label>
+							<label class="item item-input item-stacked-label"> <span class="input-label">Opened By</span>
+								<input ng-model="closedTicketForm['opened_by.name']" type="text" readonly />
+							</label>
+							<label class="item item-input item-stacked-label"> <span class="input-label">Assignment Group</span>
+								<input readonly ng-model="closedTicketForm['assignment_group.name']" type="text" />
+							</label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-select item-select-break selectBreakHt">
+								<div class="input-label">
+									Status
+								</div>
+								<select data-ng-model='closedTicketForm.u_status' disabled>
+									<option selected>{{closedTicketForm.u_status}}</option>
+								</select> </label>
+							<label class="item item-input item-select item-select-break selectBreakHt">
+								<div class="input-label">
+									SRC Support
+								</div>
+								<select data-ng-model='closedTicketForm.u_src_solved' disabled>
+									<option selected>{{closedTicketForm.u_src_solved}}</option>
+								</select> </label>
+							<!--<label class="item item-input item-select item-select-break selectBreakHt">
+								<div class="input-label">
+									Priority
+								</div>
+								<select data-ng-model='closedTicketForm.u_priority' disabled>
+									<option>{{closedTicketForm.u_priority}}</option>
+								</select> </label>-->
+						</div>
+					</div><!--End of Row -->
+					<div class="row responsive-lg">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Asset Number</span>
+								<input readonly type="text" ng-model="closedTicketForm['u_asset_number.u_asset_number']">
+							</label>
+						</div>
+
+					</div>
+					<div class="row">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Short Description</span> 								<textarea data-ng-model='closedTicketForm.u_short_description' rows="6"  disabled></textarea></label>
+							<label class="item item-input item-stacked-label">
+                            <span class="input-label">Description</span>
+                            <span style="background:#f8f8f8; white-space:normal!important; display:block; padding:5px; font-size:15px;">{{closedTicketForm.description}}</span>
+                            </label>
+							<!--<label class="item item-input item-stacked-label"> <span class="input-label">Description</span> 								<textarea data-ng-model='closedTicketForm.description' rows="6" disabled> 
+							</textarea> </label> -->
+                            
+                           
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('defectinformation')">
+					<h2>Defect Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.defectinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.defectinformation"></i>
+				</div>
+				<!--<div ng-show="show_section.defectinformation" class="item removeanypadding">
+			
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								1. Effected Module
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category1' disabled>
+								<option>{{closedTicketForm.u_defect_category1}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								1. Component
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category2' disabled>
+								<option>{{closedTicketForm.u_defect_category2}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								1. Defect
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category3' disabled>
+								<option>{{closedTicketForm.u_defect_category3}}</option>
+							</select> </label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								2. Effected Module
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category_2' disabled>
+								<option>{{closedTicketForm.u_defect_category_2}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								2. Component
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category2_2' disabled>
+								<option>{{closedTicketForm.u_defect_category2_2}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								2. Defect
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category3_2' disabled>
+								<option>{{closedTicketForm.u_defect_category3_2}}</option>
+							</select> </label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								3. Effected Module
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category_3' disabled>
+								<option>{{closedTicketForm.u_defect_category_3}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								3. Component
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category2_3' disabled>
+								<option>{{closedTicketForm.u_defect_category2_3}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								3. Defect
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category3_3' disabled>
+								<option>{{closedTicketForm.u_defect_category3_3}}</option>
+							</select> </label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								4. Effected Module
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category_4' disabled>
+								<option>{{closedTicketForm.u_defect_category_4}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								4. Component
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category2_4' disabled>
+								<option>{{closedTicketForm.u_defect_category2_4}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								4. Defect
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category3_4' disabled>
+								<option>{{closedTicketForm.u_defect_category3_4}}</option>
+							</select> </label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								5. Effected Module
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category_5' disabled>
+								<option>{{closedTicketForm.u_defect_category_5}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								5. Component
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category2_5' disabled>
+								<option>{{closedTicketForm.u_defect_category2_5}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								5. Defect
+							</div>
+							<select data-ng-model='closedTicketForm.u_defect_category3_5' disabled>
+								<option>{{closedTicketForm.u_defect_category3_5}}</option>
+							</select> </label>
+					</div>
+
+			
+				</div>-->
+                
+                <div ng-show="show_section.defectinformation" class="item removeanypadding">
+					<!-- <div class="row"> -->
+					<div class="col">
+                    
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								1. Effected Module
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category1' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								1. Component
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category2' type="text" readonly="readonly" disabled="disabled" />
+							 </label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								1. Defect
+							</div>
+							<input data-ng-model='closedTicketForm.u_defect_category3' type="text" readonly="readonly" disabled="disabled" />
+                             </label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								2. Effected Module
+							</div>
+							<input data-ng-model='closedTicketForm.u_defect_category_2' type="text" readonly="readonly" disabled="disabled" />
+                           </label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								2. Component
+							</div>
+							<input data-ng-model='closedTicketForm.u_defect_category2_2' type="text" readonly="readonly" disabled="disabled" />
+                           </label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								2. Defect
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category3_2' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								3. Effected Module
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category_3' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								3. Component
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category2_3' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								3. Defect
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category3_3' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								4. Effected Module
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category_4' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								4. Component
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category2_4' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								4. Defect
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category3_4' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+					</div>
+
+					<div class="col">
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								5. Effected Module
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category_5' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								5. Component
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category2_5' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+						<label class="item item-input item-stacked-label">
+							<div class="input-label">
+								5. Defect
+							</div>
+                            <input data-ng-model='closedTicketForm.u_defect_category3_5' type="text" readonly="readonly" disabled="disabled" />
+							</label>
+					</div>
+
+					<!-- </div> -->
+				</div>
+                
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('customerinformation')">
+					<h2>Customer Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.customerinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.customerinformation"></i>
+				</div>
+				<div ng-show="show_section.customerinformation"  class="item removeanypadding">
+
+					<!-- <div class="row responsive-md"> -->
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								City
+							</div>
+							<select data-ng-model='closedTicketForm.u_city' disabled>
+								<option selected>{{closedTicketForm.u_city}}</option>
+							</select> </label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">State</span>
+							<input data-ng-model='closedTicketForm.u_state' disabled  type="text">
+						</label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Ship to
+							</div>
+							<select data-ng-model='closedTicketForm.u_ship_sold_to' disabled>
+								<option selected>{{closedTicketForm.u_ship_sold_to}}</option>
+							</select> </label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Account Name</span>
+							<input data-ng-model='closedTicketForm.u_account_name' disabled  type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Region</span>
+							<input data-ng-model='closedTicketForm.u_region' disabled  type="text">
+						</label>
+					</div>
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label">Sales Org</span>
+							<input data-ng-model='closedTicketForm.u_salesorg' disabled  type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">SalesDistrict ID</span>
+							<input data-ng-model='closedTicketForm.u_salesdistrictid' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">SalesRegion ID</span>
+							<input data-ng-model='closedTicketForm.u_salesregionid' disabled  type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Customer Street</span>
+							<input data-ng-model='closedTicketForm.u_customer_street' disabled  type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Asset Class</span>
+							<input  data-ng-model='closedTicketForm.u_assetclass' disabled type="text">
+						</label>
+
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Market Sector
+							</div>
+							<select disabled="disabled"  ng-model="closedTicketForm.u_market_sector" ng-options="option.value as option.label for option in marketSectorVal">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('equipmentinformation')">
+					<h2>Equipment Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.equipmentinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.equipmentinformation"></i>
+				</div>
+				<div ng-show="show_section.equipmentinformation" class="item removeanypadding">
+					<!-- <div class="row responsive-md"> -->
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label">System Name</span>
+							<input data-ng-model='closedTicketForm.u_master_asset_tag_no' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Controller type</span>
+							<input data-ng-model='closedTicketForm.u_controller_type' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">ICC Skid Serial No</span>
+							<input data-ng-model='closedTicketForm.u_icc_skid_serial_no' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Electronics Serial No</span>
+							<input data-ng-model='closedTicketForm.u_cam_serial_no' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Controller Serial No</span>
+							<input data-ng-model='closedTicketForm.u_controller_serial_id' disabled type="text">
+						</label>
+						<label class="item item-input item-stacked-label"> <span class="input-label">Fluidics Serial No</span>
+							<input data-ng-model='closedTicketForm.u_fluidics_serial_no' disabled type="text">
+						</label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Operational Status
+							</div>
+							<select data-ng-model='closedTicketForm.u_operational_status' disabled>
+								<option selected>{{closedTicketForm.u_operational_status}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								DCS Connection
+							</div>
+							<select disabled="disabled"  ng-model="closedTicketForm.u_dsc_true_connection" ng-options="option.value as option.label for option in dcsConnectionVal">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+					<div class="col">
+						<div class="row responsive-md">
+							<div class="col" style="margin-bottom:0px">
+								<div class="item item-checkbox" style="border:none">
+									<label class="checkbox">
+										<input disabled type="checkbox" ng-model="closedTicketForm.u_hardware_kits" ng-checked="{{closedTicketForm.u_hardware_kits}}">
+									</label>
+									Hardware Kits
+								</div>
+							</div>
+
+							<div class="col" style="margin-bottom:0px">
+								<div class="item item-checkbox" style="border:none">
+									<label class="checkbox">
+										<input disabled type="checkbox" ng-model="closedTicketForm.u_ethernet_kits" ng-checked="{{closedTicketForm.u_ethernet_kits}}">
+									</label>
+									Ethernet kits
+								</div>
+
+							</div>
+						</div>
+
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								CAM Firmware Rev
+							</div>
+							<select data-ng-model='closedTicketForm.u_ts2_firmware_rev' disabled>
+								<option selected>{{closedTicketForm.u_ts2_firmware_rev}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Temperature C or F
+							</div>
+							<select data-ng-model='closedTicketForm.u_temperature_c_or_f' disabled>
+								<option selected>{{closedTicketForm.u_temperature_c_or_f}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								CM Firmware Rev
+							</div>
+							<select data-ng-model='closedTicketForm.u_mrc__psc_firmware_rev' disabled>
+								<option selected>{{closedTicketForm.u_mrc__psc_firmware_rev}}</option>
+							</select> </label>
+
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Date of Upgrade</span>
+							<input disabled ng-model="closedTicketForm.u_date_of_upgrade"  type="text">
+						</label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Control Status
+							</div>
+							<select data-ng-model='closedTicketForm.u_control_status' disabled>
+								<option selected>{{closedTicketForm.u_control_status}}</option>
+							</select> </label>
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Cooler Option
+							</div>
+							<select data-ng-model='closedTicketForm.u_fluidic_cooler_option' disabled>
+								<option value="">-- Select --</option>
+								<option value="no">No</option>
+                                <option value="yes">Yes Original</option>
+                                <option value="retrofit">Yes with Retrofit</option>
+							</select> </label>
+					</div>
+					<!-- </div> -->
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('incident')">
+					<h2>Incident</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.incident"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.incident"></i>
+				</div>
+				<div ng-show="show_section.incident"  class="item removeanypadding">
+					<div class="row responsive-lg">						
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Issue End Date</span>
+								<input data-ng-model='closedTicketForm.u_issue_end_date' type="date" disabled >
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('notes')">
+					<h2>Notes and Activity</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.notes"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.notes"></i>
+				</div>
+				<div ng-show="show_section.notes"  class="item removeanypadding">
+					<div class="row responsive-lg">
+						<div class="col">
+							<!--<label class="item item-input item-stacked-label"> <span class="input-label">Notes</span> 								<textarea data-ng-model='closedTicketForm.work_notes' rows="6"  disabled> 
+							</textarea> </label> -->
+							<label  class="item item-input item-stacked-label"> <span class="input-label">Additional Comments</span> 								<textarea data-ng-model='closedTicketForm.additionalComments' rows="6" disabled="disabled"> 
+							</textarea> </label>
+							<br />
+							<label class="item item-input item-stacked-label"> <span class="input-label">Additional Comment Activity</span> <p ng-bind="closedTicketForm.u_additional_comment_mobile" style="white-space: pre;"></p> </label>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+			</div>
+
+		</form>
+	</ion-content>
+</ion-view>

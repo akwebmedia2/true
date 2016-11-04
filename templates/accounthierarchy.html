@@ -1,0 +1,68 @@
+﻿<ion-tabs class="tabs-only tabs-top tabs-dark">
+	<ion-tab title="Current">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Current</h1>
+		</header>
+		<ion-content has-header="false" has-tabs="false" padding="true" scroll="true">
+			<div class="filterPlace">
+				<div class="item item-input-inset">
+					<div class="item-input-wrapper">
+						<input type="search"
+						placeholder="Filter/Search items..."
+						ng-model="$parent.search">
+					</div>
+				</div>
+				<ion-item ng-click="showAccountHierarchyDetails(searchItem,'NEW')" class="item-icon-right" ng-if="search.length>3" ng-repeat="searchItem in filtered = (searchItems | filter:search)" item="item">
+					<h3><b>Acc Name </b> : {{ searchItem.u_account_name }}</h3>
+					<h3><b>City </b> : {{ searchItem.u_city }}</h3>
+					<h3><b>Ship To </b> : {{ searchItem.u_ship_to }}</h3>
+					<h3><b>Elect. Serial No</b> : {{ searchItem.u_cam_serial_number }}</h3>
+					<i ng-if="!inneritem.isLetter" class="icon ion-chevron-right icon-accessory"></i>
+				</ion-item>
+				<ion-item ng-if="filtered.length == 0" >
+					<strong>No record found...</strong>
+				</ion-item>
+			</div>
+			<ion-list>
+				<div ng-repeat="item in items">
+					<ion-item class="item-stable"
+					ng-click="toggleGroup(item)"
+					ng-class="{active: isGroupShown(item)}">
+						<i class="icon" ng-class="isGroupShown(item) ? 'ion-minus' : 'ion-plus'"></i>
+						&nbsp;
+						{{item.cityname}}
+					</ion-item>
+					<ion-item class="item-accordion removeanypadding"
+					ng-repeat="inneritem in item.groupedItems"
+					ng-show="isGroupShown(item)">
+						<a class="item my-item item-icon-right paddingTen"	ng-click="showAccountHierarchyDetails(inneritem,'NEW')"> <!-- <h3 ng-if="!inneritem.isLetter"><b>Account Name</b> : {{ inneritem.u_account_name }}</h3>  --> <h3 ng-if="!inneritem.isLetter"><b>Acc Name</b> : {{ inneritem.u_account_name }}</h3> <!-- <h3 ng-if="!inneritem.isLetter"><b>SHIP TO </b> : {{ inneritem.u_ship_to }}</h3>  --> <h3 ng-if="!inneritem.isLetter"><b>Ship To </b> : {{ inneritem.u_ship_to }}</h3> <!-- <h3 ng-if="!inneritem.isLetter"><b>CAM Electronics Serial ID </b> : {{ inneritem.u_cam_serial_number }}</h3>  --> <h3 ng-if="!inneritem.isLetter"><b>Elect. Serial No</b> : {{ inneritem.u_cam_serial_number }}</h3> <!-- <h3  ng-if="!inneritem.isLetter"><b>Fluidics Serial No </b> : {{ inneritem.u_fluidics_serial_number }}</h3>  --> <h3  ng-if="!inneritem.isLetter"><b>Fluidics Serial No </b> : {{ inneritem.u_fluidics_serial_number }}</h3> <i ng-if="!inneritem.isLetter" class="icon ion-chevron-right icon-accessory"></i> </a>
+					</ion-item>
+				</div>
+			</ion-list>
+			<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+            <ion-item ng-if="noRecordFound" >
+					<strong>No record found...</strong>
+				</ion-item>
+		</ion-content>
+	</ion-tab>
+	<ion-tab title="Pending Queue">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Pending Queue</h1>
+		</header>
+		<ion-content padding="true" has-header="true">
+			<div class="list">
+				<div class="item item-input-inset">
+					<div class="item-input-wrapper">
+						<input type="search"
+						placeholder="Filter/Search items..."
+						ng-model="$parent.search">
+					</div>
+				</div>
+				<ion-item class="removeanypadding" style="padding-left: 20px !important; padding-right: 20px !important;" ng-repeat="pendingAccountItem in pendingAccountItems | filter:search">
+					<a ng-click="showAccountHierarchyDetails(pendingAccountItem,'PENDING')" class=" my-item item-icon-right"> <h3><b>Acc Name </b> : {{ pendingAccountItem.u_account_name }}</h3> <h3><b>City </b> : {{ pendingAccountItem.u_city }}</h3> <h3><b>Ship To </b> : {{ pendingAccountItem.u_ship_to }}</h3> <h3><b>Electronics Serial No</b> : {{ pendingAccountItem.u_cam_serial_number }}</h3> <i  class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+			</div>
+		</ion-content>
+	</ion-tab>
+</ion-tabs>
+

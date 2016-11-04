@@ -1,0 +1,256 @@
+﻿<ion-view>
+	<ion-content has-header="true" padding="true">
+		<form name="orderSparePart" id="orderSparePart" novalidate="novalidate"  on-valid-submit="doOrderSparePart()">
+			<div class="item removeanypadding">
+				<div style="height: 20px;"></div>
+				<div class="item item-form-divider item-icon-right" style="margin-left:5px;margin-right:5px;" ng-click="section_click('vsparepart')">
+					<h2>Spare Parts</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.vsparepart"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.vsparepart"></i>
+				</div>
+				<div ng-show="show_section.vsparepart" style="margin-left:10px;margin-right:10px;" class="removeanypadding">
+					<div style="padding:10px;">
+						<div ng-show="vespareParts.u_1_component && vespareParts.u_1_component.length > 0" style="background: lightgray;padding: 10px;border-radius: 5px;margin-bottom: 10px;" class="col">
+							<div style="background: white !important;" class="list">
+								<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+									<input readonly="readonly" value="{{vespareParts.u_1_component}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Part Description
+									<input readonly="readonly" value="{{vespareParts.u_1_spare_part}}"  type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input readonly="readonly" value="{{vespareParts.u_1_sap_part__}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input value="{{vespareParts.u_1_quantity}}" ng-model="vespareParts.u_1_quantity" placeholder="0" type="number" max="99">
+								</label>
+							</div>
+						</div>
+
+						<div ng-show="vespareParts.u_2_component && vespareParts.u_2_component.length > 0" style="background: lightgray;padding: 10px;border-radius: 5px;margin-bottom: 10px;" class="col">
+							<div style="background: white !important;" class="list">
+								<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+									<input readonly="readonly" value="{{vespareParts.u_2_component}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Part Description
+									<input readonly="readonly" value="{{vespareParts.u_2_spare_part}}"  type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input readonly="readonly" value="{{vespareParts.u_2_sap_part__}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input value="{{vespareParts.u_2_quantity}}" ng-model="vespareParts.u_2_quantity" placeholder="0" type="number" max="99">
+								</label>
+							</div>
+						</div>
+
+						<div ng-show="vespareParts.u_3_component && vespareParts.u_3_component.length > 0" style="background: lightgray;padding: 10px;border-radius: 5px;margin-bottom: 10px;" class="col">
+							<div style="background: white !important;" class="list">
+								<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+									<input readonly="readonly" value="{{vespareParts.u_3_component}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Part Description
+									<input readonly="readonly" value="{{vespareParts.u_3_spare_part}}"  type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input readonly="readonly" value="{{vespareParts.u_3_sap_part__}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input value="{{vespareParts.u_3_quantity}}" ng-model="vespareParts.u_3_quantity" placeholder="0" type="number" max="99">
+								</label>
+							</div>
+						</div>
+
+						<div ng-show="vespareParts.u_4_component && vespareParts.u_4_component.length > 0" style="background: lightgray;padding: 10px;border-radius: 5px;margin-bottom: 10px;" class="col">
+							<div style="background: white !important;" class="list">
+								<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+									<input readonly="readonly" value="{{vespareParts.u_4_component}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Part Description
+									<input readonly="readonly" value="{{vespareParts.u_4_spare_part}}"  type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input readonly="readonly" value="{{vespareParts.u_4_sap_part__}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input value="{{vespareParts.u_4_quantity}}" ng-model="vespareParts.u_4_quantity" placeholder="0" type="number" max="99">
+								</label>
+							</div>
+						</div>
+
+						<div ng-show="vespareParts.u_5_component && vespareParts.u_5_component.length > 0" style="background: lightgray;padding: 10px;border-radius: 5px;margin-bottom: 10px;" class="col">
+							<div style="background: white !important;" class="list">
+								<label class="item item-input item-stacked-label"> <span class="input-label">Component</span>
+									<input readonly="readonly" value="{{vespareParts.u_5_component}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Part Description
+									<input readonly="readonly" value="{{vespareParts.u_5_spare_part}}"  type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input readonly="readonly" value="{{vespareParts.u_5_sap_part__}}" type="text">
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input value="{{vespareParts.u_5_quantity}}" ng-model="vespareParts.u_5_quantity" placeholder="0" type="number" max="99">
+								</label>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="item item-form-divider item-icon-right" style="margin-left:5px;margin-right:5px;"  ng-click="section_click('vadditionalsp')">
+					<h2>Additional Spare Parts</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.vadditionalsp"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.vadditionalsp"></i>
+				</div>
+				<div ng-show="show_section.vadditionalsp" style="margin-left:10px;margin-right:10px;" class="removeanypadding">
+					<div class="row responsive-lg">
+						<div class="col marginBot0">
+							<div class="list">
+								<label class="item item-input item-select item-select-break"> Part Description <!--
+									<select data-ng-model='vespareParts.u_sap_part___add' ng-change='onAdditionalSparePartChange(vespareParts.u_sap_part___add)'
+									ng-options="obj.u_replacement_part_text as obj.u_replacement_part_text for obj in defectList">-->
+									<select data-ng-model='vespareParts.u_sap_part___add' ng-change='onAdditionalSparePartChange(vespareParts.u_sap_part___add)'
+									ng-options="obj.u_replacement_part_text as obj.u_replacement_part_text for obj in uniquedefectList | orderBy:'u_replacement_part_text'">
+										<option value="" selected>-- Select --</option>
+									</select> </label>
+
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input ng-model="vespareParts.u_spare_part_add" type="text" readonly="readonly" value="{{vespareParts.u_spare_part_add}}" />
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input ng-model="vespareParts.u_quantity_add" value="{{vespareParts.u_quantity_add}}" placeholder="0" type="number" max="99">
+								</label>
+							</div>
+						</div>
+					</div>
+                    
+                     <!--2nd-->
+							<div class="paddingTen" ng-show="vespareParts.u_sap_part_desc_2 && vespareParts.u_sap_part_desc_2.length > 0" style="padding-bottom:0px!important">
+								<div class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<div class="row">
+											<div class="col marginBot0">
+												<div class="list">
+													<label class="item item-input item-select item-select-break"> Part Description <!--
+									<select data-ng-model='vespareParts.u_sap_part___add' ng-change='onAdditionalSparePartChange(vespareParts.u_sap_part___add)'
+									ng-options="obj.u_replacement_part_text as obj.u_replacement_part_text for obj in defectList">-->
+									<select data-ng-model='vespareParts.u_sap_part_desc_2' ng-change='onAdditionalSparePartChange2(vespareParts.u_sap_part_desc_2)'
+									ng-options="obj.u_replacement_part_text as obj.u_replacement_part_text for obj in uniquedefectList | orderBy:'u_replacement_part_text'">
+										<option value="" selected>-- Select --</option>
+									</select> </label>
+
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input ng-model="vespareParts.u_sap_part_num_2" type="text" readonly="readonly" value="{{vespareParts.u_sap_part_num_2}}" />
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input ng-model="vespareParts.u_sap_part_qty_2" value="{{vespareParts.u_sap_part_qty_2}}" placeholder="0" type="number" max="99">
+								</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--3rd-->
+							<div class="paddingTen" ng-show="vespareParts.u_sap_part_desc_3 && vespareParts.u_sap_part_desc_3.length > 0" style="padding-top:0px!important" >
+								<div class="col lightGreyPadMar">
+									<div class="list whiteBg">
+										<div class="row">
+											<div class="col marginBot0">
+												<div class="list">
+										<label class="item item-input item-select item-select-break"> Part Description <!--
+									<select data-ng-model='vespareParts.u_sap_part___add' ng-change='onAdditionalSparePartChange(vespareParts.u_sap_part___add)'
+									ng-options="obj.u_replacement_part_text as obj.u_replacement_part_text for obj in defectList">-->
+									<select data-ng-model='vespareParts.u_sap_part_desc_3' ng-change='onAdditionalSparePartChange3(vespareParts.u_sap_part_desc_3)'
+									ng-options="obj.u_replacement_part_text as obj.u_replacement_part_text for obj in uniquedefectList | orderBy:'u_replacement_part_text'">
+										<option value="" selected>-- Select --</option>
+									</select> </label>
+
+								<label class="item item-input item-stacked-label"> Spare Part Number
+									<input ng-model="vespareParts.u_sap_part_num_3" type="text" readonly="readonly" value="{{vespareParts.u_sap_part_num_3}}" />
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+									<input ng-model="vespareParts.u_sap_part_qty_3" value="{{vespareParts.u_sap_part_qty_3" placeholder="0" type="number" max="99">
+								</label>
+									</div>
+								</div>
+							</div>
+                            </div>
+								</div>
+							</div>
+                    
+                    
+				</div>
+				<div class="item item-form-divider item-icon-right" style="margin-left:5px;margin-right:5px;"  ng-click="section_click('vshippingdetails')">
+					<h2>Shipping Details</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.vshippingdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.vshippingdetails"></i>
+				</div>
+				<div ng-show="show_section.vshippingdetails" style="margin-left:10px;margin-right:10px;" class="removeanypadding">
+					<div class="row responsive-lg">
+						<div class="col marginBot0">
+							<div class="list">
+								<label class="item item-input item-stacked-label"> <span class="input-label">Ship To</span>
+									<input type="text" readonly="readonly" value='{{vespareParts.u_ship_to}}' />
+								</label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">Delivery Address and notes</span> 									<textarea ng-model="vespareParts.u_delivery_address" rows="4" cols="5">{{vespareParts.u_delivery_address}}</textarea> </label>
+								<label class="item item-input item-stacked-label"> <span class="input-label">CSC Email Address</span>
+									<input readonly="readonly" value='{{vespareParts.u_csc_mail_address}}' type="text" />
+								</label>
+
+								<label class="item item-input item-stacked-label"> <span class="input-label">Additional Email ID</span>
+									<input ng-model="vespareParts.u_email" value="{{vespareParts.u_email}}" type="email" validate-email id="email" />                               
+								</label>
+
+								<li class="item item-checkbox">
+									<label class="checkbox">
+										<input ng-model="vespareParts.u_critical" ng-checked="vespareParts.u_critical == 1" ng-change="onSparePartCritical(vespareParts.u_critical)" type="checkbox">
+									</label>
+									Critical
+								</li>
+								<label class="item item-input item-stacked-label"> <span class="input-label">*Expected Delivery Date</span>
+									<input ng-disabled="vespareParts.u_critical" ng-model="vespareParts.u_expected_date" value='{{vespareParts.u_expected_date}}' type="date">
+								</label>
+								<label class="item item-input item-stacked-label"> Order Status <!-- <input readonly="readonly" value="{{vespareParts.u_order_status}}" type="text" /> -->
+									<input readonly="readonly" value="New" type="text" />
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('sapdetails')">
+					<h2>SAP Details</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.sapdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.sapdetails"></i>
+				</div>
+
+				<div ng-show="show_section.sapdetails" class="removeanypadding marginTen">
+					<div class="row responsive-lg">
+						<div class="col marginBot0">
+							<label class="item item-input item-stacked-label">Sales Order Number
+								<input readonly="readonly" value="{{vespareParts.u_sales_order_number}}" type="text">
+							</label>
+
+						</div>
+						<div class="col">
+							<label class="item item-input item-stacked-label">Confirmed Delivery Date
+								<input readonly="readonly" value="{{vespareParts.u_confirmed_delivery_date}}"  type="text">
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div style="margin-top: 30px; margin-bottom: 30px;" align="center"></div>
+				<div style="margin-top: 30px; margin-bottom: 30px;" align="center">
+					<div class="row">
+						<div class="col">
+							<button ng-click="onSparePartsUpload()" class="button button-small button-positive button-same-size">
+								Upload Order
+							</button>
+							<button ng-click="onSparePartsUploadCancel()" class="button button-small button-positive button-same-size">
+								Cancel
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

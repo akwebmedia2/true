@@ -1,0 +1,320 @@
+﻿<ion-view>
+	<ion-content padding="true" delegate-handle="myScroll" has-header="true">
+		<div id="openTicketCheckPhone" class="show-for-small-down"></div>
+		<form name="newticketform" id="newticketform" novalidate="novalidate" onkeypress="return event.keyCode != 13;" on-valid-submit="doLogin()" class="marginTop0">
+			<div class="list">
+				<div class="item item-form-divider item-icon-right" ng-init="show_section.customerinformation = true" ng-click="section_click('customerinformation')">
+					<h2>Customer Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.customerinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.customerinformation"></i>
+				</div>
+				<div ng-show="show_section.customerinformation" class="item removeanypadding">
+					<div class="paddingTen">
+						<label ng-class="isInvalid('ticketform.u_city') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label padding20"> <i class="icon ion-search placeholder-icon"></i> <span class="input-label">City</span> <!-- <input type="search" ng-keyup="onSearchKeyword()" ng-model="cityserach.keyword"  placeholder="Search City..." /> -->
+							<input type="text" ng-keyup="onSearchKeyword()" ng-model="cityserach.keyword"  placeholder="Search City..." ng-disabled="!isGrpExist" />
+							<input type="text" ng-model="ticketform.u_city"  class="hideElement" />
+						</label>
+						<div class="padding20 lightGreyBg">
+							<ion-item ng-click="onCitySelected(city)" ng-if="cityserach.showList && cityserach.keyword.length>3" ng-repeat="city in (filteredPersons =(cities | customFilter:cityserach.keyword))">
+								<a> {{city.currentItem.u_city}} </a>
+							</ion-item>
+							<ion-item ng-if="filteredPersons.length == 0">
+								<strong>No city found...</strong>
+							</ion-item>
+						</div>
+					</div>
+
+					<div class="row responsive-lg">
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_account_name') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Account Name
+								</div>
+								<select ng-disabled="!itemsAN || itemsAN.length<=0 || itemsAN.length == 0" data-ng-model='ticketform.u_account_name' ng-change='onAccountNameChange()' data-ng-options='item as item for item in itemsAN'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_ship_sold_to') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Ship To
+								</div>
+								<select ng-disabled="!itemsST || itemsST.length<=0 || itemsST.length == 0" data-ng-model='ticketform.u_ship_sold_to' ng-change='onShipToChange()' data-ng-options='item as item for item in itemsST'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('equipmentinformation')">
+					<h2>Equipment Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.equipmentinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.equipmentinformation"></i>
+				</div>
+				<div ng-show="show_section.equipmentinformation" class="item removeanypadding">
+					<div class="row responsive-lg">
+						<div class="col">
+							<div class="list card removeanypadding">
+
+								<div class="item removeanypadding">
+									<div>
+										<label ng-class="isInvalid('ticketform.u_master_asset_tag_no') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+											<div class="input-label">
+												System Name
+											</div>
+											<select ng-disabled="!itemsSN || itemsSN.length<=0 || itemsSN.length == 0" data-ng-model='ticketform.u_master_asset_tag_no' ng-change='onSystemNameChange()'  data-ng-options="item as item for item in itemsSN | orderBy:'toString()'">
+												<option value="" selected>-- Select --</option>
+											</select> </label>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="list card removeanypadding">
+
+								<div class="item removeanypadding">
+									<div>
+										<label ng-class="isInvalid('ticketform.u_controller_type') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+											<div class="input-label">
+												Controller Type
+											</div>
+											<select ng-disabled="!itemsCT || itemsCT.length<=0 || itemsCT.length == 0" ng-change='onControllerTypeChange()' data-ng-model='ticketform.u_controller_type' data-ng-options='item as item for item in itemsCT'>
+												<option value="" selected>-- Select --</option>
+											</select> </label>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row responsive-lg">
+						<div class="col">
+
+							<label  ng-class="isInvalid('ticketform.u_asset_number') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Asset Number
+								</div>
+								<select ng-disabled="!itemsANUM || itemsANUM.length<=0 || itemsANUM.length == 0" ng-change='onAssetNumberChange()' data-ng-model='ticketform.u_asset_number' data-ng-options='item as item for item in itemsANUM'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+						<div class="col">
+
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Electronics Serial No
+								</div>
+								<select ng-disabled="!itemsCSM || itemsCSM.length<=0 || itemsCSM.length == 0" ng-change='onCamElectronicsSerialChange()' data-ng-model='ticketform.u_cam_serial_number' data-ng-options='item as item for item in itemsCSM'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+
+						</div>
+
+					</div>
+					<div class="row responsive-lg">
+						<div class="col">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Fluidics Serial No
+								</div>
+								<select ng-disabled="!itemsFSM || itemsFSM.length<=0 || itemsFSM.length == 0" data-ng-model='ticketform.u_fluidics_serial_number' ng-change='onFluidicsSerialNumberChange()' data-ng-options='item as item for item in itemsFSM'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+
+					</div>
+					<div class="row responsive-lg">
+
+						<div class="col">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Controller Serial No
+								</div>
+								<select ng-disabled="!itemsCSD || itemsCSD.length<=0 || itemsCSD.length == 0" data-ng-model='ticketform.u_controller_serial_id' ng-change='onControllerSerialChange()' data-ng-options='item as item for item in itemsCSD'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+
+						</div>
+						<div class="col">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									ICC Skid Serial No
+								</div>
+								<select ng-disabled="!itemsICCSS || itemsICCSS.length<=0 || itemsICCSS.length == 0" data-ng-model='ticketform.u_icc_skid_serial_number' data-ng-options='item as item for item in itemsICCSS'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+
+						</div>
+					</div>
+
+					<div ng-show="ticketform.u_cam_serial_number.length > 0">
+						<div class="row responsive-md">
+							<div class="col">
+								<button type="submit"  ng-click="showAccountHierData()" class="button button-small button-positive ">
+									Show Account Hierarchy Data
+								</button>
+							</div>
+							<div class="col">
+								<button type="submit" ng-show="ticketform.u_city.length > 0 && ticketform.u_cam_serial_number.length > 0 && visibleHistBtn" ng-disabled="!checkOnline"  ng-click="viewHistoricalTickets()" class="button button-small button-positive ">
+									View Historical Tickets
+								</button>
+
+								<button type="submit" ng-hide="visibleHistBtn"  ng-click="hideHistoricalTickets()" class="button button-small button-positive ">
+									Hide Historical Tickets
+								</button>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div ng-show="isViewHistoricData && ticketform.u_cam_serial_number.length > 0">
+					<div class="sep" ></div>
+					<div class="item item-form-divider item-icon-right" ng-click="section_click('historicalTickets')">
+						<h2>View Historical Tickets</h2>
+						<i class="icon ion-ios7-plus-outline" ng-hide="show_section.historicalTickets"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.historicalTickets"></i>
+					</div>
+
+					<div ng-show="show_section.historicalTickets" class="item removeanypadding"  style="border:10px solid #ccc">
+						<ion-item ng-if="noRecordFound" class="item">
+							<strong>No record found...</strong>
+						</ion-item>
+						<ion-item class="removeanypadding paddingTen" ng-repeat="historicalTicket in historicalTickets">
+							<a class=" my-item removeanypadding"> <h3><b>Ticket Number: </b> {{ historicalTicket.number }}</h3> <h3 class="width80Per"><b>Ticket Opened Date (GMT): </b> {{ historicalTicket.opened_at }}</h3> <h3 class="width80Per"><b>Component: </b> {{historicalTicket.u_defect_category2}} <span ng-if="historicalTicket.u_defect_category2_2">,</span> {{historicalTicket.u_defect_category2_2}} <span ng-if="historicalTicket.u_defect_category2_3">,</span> {{historicalTicket.u_defect_category2_3}} <span ng-if="historicalTicket.u_defect_category2_4">,</span> {{historicalTicket.u_defect_category2_4}} <span ng-if="historicalTicket.u_defect_category2_5">,</span> {{historicalTicket.u_defect_category2_5}} </h3> <h3><b>Short Description: </b> {{historicalTicket.u_short_description}}</h3> </a>
+						</ion-item>
+
+					</div>
+				</div>
+
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('incident')">
+					<h2>Incident</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.incident"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.incident"></i>
+				</div>
+				<div ng-show="show_section.incident" class="item removeanypadding">
+					<div class="row responsive-md">
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_status') ? 'has-error' : 'has-success'" class="item item-input item-select">
+								<div class="input-label">
+									Status
+								</div>
+								<select data-ng-model='ticketform.u_status' disabled>
+									<option selected>Open</option>
+								</select> </label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-select">
+								<div class="input-label">
+									Priority
+								</div>
+								<select data-ng-model='ticketform.u_priority'>
+									<option value="" selected>-- Select --</option>
+									<option>High</option>
+									<option>Low</option>
+									<option>Medium</option>
+								</select> </label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_src_solved') ? 'has-error' : 'has-success'" class="item item-input item-select">
+								<div class="input-label">
+									SRC Support
+								</div>
+								<select data-ng-model='ticketform.u_src_solved'>
+									<option value="" selected>-- Select --</option>
+									<option>Yes</option>
+									<option>No</option>
+								</select> </label>
+						</div>
+					</div>
+					<div class="row responsive-lg">
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_issue_start_date') ? 'has-error' : 'has-success'"  class="item item-input item-stacked-label"> <span class="input-label">Issue Start Date</span>
+								<input data-ng-model='ticketform.u_issue_start_date' type="date" placeholder="2014-10-10">
+							</label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Issue End Date</span>
+								<input data-ng-model='ticketform.u_issue_end_date' type="date" placeholder="">
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('defectinformation')">
+					<h2>Defect Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.defectinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.defectinformation"></i>
+				</div>
+				<div ng-show="show_section.defectinformation" class="item removeanypadding">
+					<div class="list margin10">
+						<div class="row  responsive-lg dynamicAddItems">
+							<div class="col">
+								<label class="item item-input item-select item-select-break">
+									<div class="input-label">
+										1. Effected Module
+									</div>
+									<select ng-disabled="!u_defect_category1s || u_defect_category1s.length == 0" ng-model="_u_defect_category1" ng-change="onEffectedModuleChange(_u_defect_category1)" data-ng-options="item as item.currentItem.u_defect_category1 for item in u_defect_category1s" required="required">
+										<option value="" selected>-- Select --</option>
+									</select> </label>
+							</div>
+							<div class="col">
+								<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1','ticketform.u_defect_category2')"  class="item item-input item-select item-select-break">
+									<div class="input-label">
+										1. Component
+									</div>
+									<select ng-disabled="!u_defect_category2s || u_defect_category2s.length == 0" ng-model="_u_defect_category2" ng-change='onComponentChange(_u_defect_category2)' data-ng-options='item as item.currentItem.u_defect_category2 for item in u_defect_category2s' required="required" >
+										<option value="" selected>-- Select --</option>
+									</select> </label>
+							</div>
+							<div class="col">
+								<label ng-class="isInvalidWithCondition('ticketform.u_defect_category1','ticketform.u_defect_category3')"  class="item item-input item-select item-select-break">
+									<div class="input-label">
+										1. Defect
+									</div>
+									<select ng-disabled="!u_defect_category3s || u_defect_category3s.length == 0" ng-model="_u_defect_category3" ng-change='onDefectChange(_u_defect_category3)' data-ng-options='item as item.currentItem.u_defect_category3 for item in u_defect_category3s' required="required">
+										<option value="" selected>-- Select --</option>
+									</select> </label>
+							</div>
+						</div>
+					</div>
+					<div id="space-for-buttons2"></div>
+					<div id="space-for-buttons3"></div>
+					<div id="space-for-buttons4"></div>
+					<div id="space-for-buttons5"></div>
+					<div align="center" class="row col  marginBot30">
+						<addbuttonsbutton></addbuttonsbutton>
+						<removebuttonsbutton></removebuttonsbutton>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('sortdiscriptionpanel')">
+					<h2>Short Description</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.sortdiscriptionpanel"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.sortdiscriptionpanel"></i>
+				</div>
+				<div ng-show="show_section.sortdiscriptionpanel" class="item removeanypadding">
+					<label ng-class="isInvalid('ticketform.u_short_description') ? 'has-error' : 'has-success'"  class="item item-input item-stacked-label"> <span class="input-label">Short Description</span> 						<textarea placeholder="Enter short description" data-ng-model='ticketform.u_short_description' id="ticket-shortdescription" maxlength="100" rows="4"  required> 
+							</textarea> </label>
+				</div>
+
+			</div>
+
+			<div class="margin30" align="center">
+				<div class="row">
+					<div class="col">
+						<button type="submit" ng-click="ticketSubmit()" class="button button-small button-positive button-same-size">
+							Open Ticket
+						</button>
+						<button ng-click="ticketCancel()" class="button button-small button-positive button-same-size">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>
+

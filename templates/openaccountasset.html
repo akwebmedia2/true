@@ -1,0 +1,51 @@
+﻿<ion-tabs class="tabs-only tabs-top tabs-dark">
+	<ion-tab title="Current">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Current</h1>
+		</header>
+        <ion-item ng-if="noTicketFound" class="item">
+			<strong>No ticket found...</strong>
+		</ion-item>
+		<ion-content has-header="false" has-tabs="false" padding="true" scroll="true"><ion-item class="item-accordion removeanypadding"
+					ng-repeat="inneritem in completedItems">
+						<a class="item my-item item-icon-right paddingTen"	ng-click="showExtendedCRDetails(inneritem,'CURRENT')"> 
+                       <h3><b>Ticket Number </b> : {{inneritem.number}}</h3> 
+                    <h3><b>Stage </b> : <span ng-if="inneritem.u_stage = 'Approval'">Pending {{inneritem.u_stage}}</span> <span ng-if="inneritem.u_stage != 'Approval'">{{inneritem.u_stage}}</span></h3> 
+                    <h3><b>City </b> : {{ inneritem.u_city }}</h3> 
+                    <h3><b>Country </b> : {{ inneritem.u_country }}</h3>                  
+                      <i ng-if="!inneritem.isLetter" class="icon ion-chevron-right icon-accessory"></i> </a>
+					</ion-item>
+				</div>
+			
+			
+		</ion-content>
+	</ion-tab>
+	<ion-tab title="Pending Queue">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Pending Queue</h1>
+		</header>
+		<ion-content has-header="false" has-tabs="false" padding="true" scroll="true">
+			<div class="list">
+				<div class="item item-input-inset">
+					<div class="item-input-wrapper">
+						<input type="search"
+						placeholder="Filter/Search items..."
+						ng-model="$parent.search">
+					</div>
+				</div>
+				<ion-item class="item-accordion removeanypadding" ng-repeat="pendingAccountItem in pendingAccountItems | filter:search">
+					<a class="item my-item item-icon-right paddingTen" ng-click="showExtendedCRDetails(pendingAccountItem,'PENDING')"> 
+                    <h3><b>Ticket Number </b> : Not Generated</h3> 
+                    <h3><b>City </b> : {{ pendingAccountItem.u_city }}</h3> 
+                    <h3><b>Country </b> : {{ pendingAccountItem.u_country }}</h3> 
+                    <h3><b>System Name</b> : {{ pendingAccountItem.u_system_name }}</h3> 
+                    <i  class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>               
+                <ion-item ng-if="pendingAccountItems.length == 0">
+					<strong>No ticket found...</strong>
+				</ion-item>
+			</div>
+		</ion-content>
+	</ion-tab>
+</ion-tabs>
+

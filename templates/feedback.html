@@ -1,0 +1,86 @@
+﻿<ion-view>
+	<ion-content has-header="true" padding="true">
+
+		<div class="item">
+			<h2 class="txtOverflown">Your feedback help us make a better experience.</h2>
+		</div>
+		<div class="item item-form-divider item-icon-right" ng-click="section_click('accord','1')">
+			<h2>Report a bug</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord1"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord1"></i>
+		</div>
+		<div ng-show="show_section.accord1" class="item removeanypadding">
+			<div class="row">
+				<div class="col marginBot0">
+					<div class="list">
+						<label class="item item-input item-stacked-label txtOverflown"> <span class="input-label autoWidth">Oh no! Please describe the bug:</span> 							<textarea placeholder="Please be as specific as possible... What were you doing? What did you expect to happen? What happend instead?" data-ng-model="feedback.bugDescription" class="feedbackTxt"></textarea> </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<span style="font-size:14px; color:#FF0000;" class="txtOverflown" ng-if="!isOnline">You can submit the feedback only in case of online.</span>
+					<div style="padding-top: 10px; padding-bottom: 10px;" class="text-center">
+						<button type="submit" ng-if="isOnline"  class="button button-small button-positive button-same-size" ng-click="reportbug(feedback.bugDescription)">
+							Send
+						</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="item item-form-divider item-icon-right" ng-click="section_click('accord','2')">
+			<h2>Offer a suggestion</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord2"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord2"></i>
+		</div>
+		<div ng-show="show_section.accord2" class="item removeanypadding">
+			<div class="row">
+				<div class="col marginBot0">
+					<div class="list">
+						<label class="item item-input item-stacked-label txtOverflown"> <span class="input-label autoWidth">How can we improve True Sense Mobile App?</span> 							<textarea placeholder="Please be as specific as possible... What were you doing? What did you expect to happen? What happend instead?" data-ng-model="feedback.suggestionDescription" class="feedbackTxt"></textarea> </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<span style="font-size:14px; color:#FF0000;" class="txtOverflown" ng-if="!isOnline">You can submit the feedback only in case of online.</span>
+					<div style="padding-top: 10px; padding-bottom: 10px;" class="text-center">
+						<button type="submit" ng-if="isOnline" class="button button-small button-positive button-same-size" ng-click="offersuggestion(feedback.suggestionDescription)">
+							Send
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item item-form-divider item-icon-right" ng-click="section_click('accord','3')">
+			<h2>Ask a question</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord3"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord3"></i>
+		</div>
+		<div ng-show="show_section.accord3" class="item removeanypadding">
+			<div class="row">
+				<div class="col marginBot0">
+					<div class="list">
+						<label class="item item-input item-stacked-label txtOverflown"> <span class="input-label  autoWidth">How can we help you?</span> 							<textarea placeholder="Please specify your question." data-ng-model="feedback.questionDescription" class="feedbackTxt"></textarea> </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<span style="font-size:14px; color:#FF0000;" class="txtOverflown" ng-if="!isOnline">You can submit the feedback only in case of online.</span>
+					<div style="padding-top: 10px; padding-bottom: 10px;" class="text-center">
+						<button type="submit" ng-if="isOnline" class="button button-small button-positive button-same-size" ng-click="askquestion(feedback.questionDescription)">
+							Send
+						</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+        <div id='myChart'></div>
+	</ion-content>
+</ion-view>
+<style type="text/css">
+	.marginBot0 {
+		margin-bottom:0px !important;
+		padding:0px !important
+	}
+</style>

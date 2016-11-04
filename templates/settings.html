@@ -1,0 +1,107 @@
+﻿<ion-view>
+	<ion-content has-header="true" padding="true">	
+		<div ng-if='firstname.length>0' class="animate-if settingHead" >
+			<h4> Welcome <span ng-bind='lastname'></span>, <span ng-bind='firstname'></span> (<span ng-bind='ssoid'></span>) </h4>
+			<h5 ng-if='firstname.length>0'><span ng-bind='email'></span></h5>
+		</div>
+		<div class="animate-if settingHead" >
+			<h5><strong>App Version:</strong><span> {{appVersion}}</span></h5>
+
+		</div>
+        
+        <div  class="animate-if settingHead">
+        <h5><strong>Current Country Code is: </strong> <span ng-if="usersCountryCode">{{usersCountryCode}}</span> <span ng-if="!usersCountryCode">None</span></h5>
+			<label ng-class="isInvalid('newaccountform.u_country') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Select Country
+						</div>
+						<select  ng-model="country_code" ng-options="option.country as option.country for option in countryList | orderBy:'country'">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>	<br />
+                        <button type="submit" ng-click="switchCountry(country_code)" class="button button-small button-positive button-same-size">
+							Switch Country
+						</button>
+                        
+                         <button type="submit" ng-click="viewAllCountry()" class="button button-small button-positive" style="padding:7px 10px; float:right">
+							View All Country's Data
+						</button>
+
+		</div>
+
+		<div class="item item-form-divider item-icon-right" ng-init="show_section.accord1 = true" ng-click="section_click('accord','1')">
+			<h2>Ticket Management</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord1"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord1"></i>
+		</div>
+
+		<div ng-show="show_section.accord1"  class="item padding">
+			<!--
+			<h3><b>Ticket Number: </b> {{ upTkt.number }}</h3>
+			<h3 class="width80Per"><b>Account Name : </b> {{ upTkt.u_account_name }}</h3>
+			<h3 class="width80Per"><b>Short Description : </b> {{ upTkt.short_description }}</h3>
+			<h3><b>Opened At : </b> {{ upTkt.opened_at }}</h3>-->
+
+			<span class="input-label greyColr"> Last Sync(GMT) {{crts}}</span>
+			<span class="input-label"> No of pending tickets to upload : {{ptcount}}</span>
+			<button ng-click="pendingElementsManualSync()" class="button  button-block button-positive">
+				MANUAL SYNC
+			</button>
+		</div>
+		<div class="sep"></div>
+		<div class="item item-form-divider item-icon-right" ng-click="section_click('accord','2')">
+			<h2>Account Hierarchy</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord2"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord2"></i>
+		</div>
+
+		<div ng-show="show_section.accord2" class="item padding">
+			<!--
+			<h3><b>Acc Name </b> : {{ accHie.u_account_name }}</h3>
+			<h3><b>City </b> : {{ accHie.u_city }}</h3>
+			<h3><b>Ship To </b> : {{ accHie.u_ship_to }}</h3>
+			<h3><b>Cam # </b> : {{ accHie.u_cam_serial_number }}</h3>-->
+
+			<span class="input-label greyColr">Last Sync(GMT) {{hrts}}</span>
+			<div align="center" >
+				<button ng-click="accountManualSync()" class="button  button-block button-positive">
+					MANUAL SYNC
+				</button>
+			</div>
+		</div>
+		<!--
+		<div class="sep"></div>
+		<div class="item item-form-divider item-icon-right" ng-click="section_click('accord','3')">
+		<h2>Defect Category Hierarcy</h2>
+		<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord3"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord3"></i>
+		</div>
+		<div ng-show="show_section.accord3" class="item padding">
+		<h3><b>#1</b> : {{ defHie.u_defect_category1 }}</h3>
+		<h3><b>#3</b> : {{ defHie.u_defect_category2 }}</h3>
+		<h3><b>#3</b> : {{ defHie.u_defect_category3 }}</h3>
+		<span class="input-label greyColr"> Last Sync(GMT) {{drts}}</span>
+		<button ng-click="defectManualSync()" class="button  button-block button-positive">
+		MANUAL SYNC
+		</button>
+		</div>-->
+
+		<div class="sep"></div>
+		<div class="item item-form-divider item-icon-right" ng-click="section_click('accord','4')">
+			<h2>Change Passcode</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accord4"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accord4"></i>
+		</div>
+		<div ng-show="show_section.accord4" class="item">
+			<h5 class="pinErrorMsg" ng-bind="newpinError" ng-if="newpinError !=''"></h5>
+			<label class="item item-input item-stacked-label"> <span class="input-label">Old Passcode</span>
+				<input type="password" pattern="[0-9]*" data-ng-model="pinChange.oldpasscode" maxlength="4" />
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label">New Passcode</span>
+				<input type="password" pattern="[0-9]*" data-ng-model="pinChange.newpasscode" maxlength="4" />
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label">Confirm Passcode</span>
+				<input type="password" pattern="[0-9]*" data-ng-model="pinChange.confirmnewpasscode" maxlength="4" />
+			</label>
+			<button class="button  button-block button-positive" ng-click="submitPin(pinChange)">
+				Change Passcode
+			</button>
+		</div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,119 @@
+﻿<ion-view>
+	<ion-content has-header="true" delegate-handle="myScroll" padding="true">
+		<form name="orderSparePart" id="orderSparePart" novalidate="novalidate"  on-valid-submit="doOrderSparePart()">
+					<div  align="left">
+						<div  class="list">
+							<div class="item item-form-divider item-icon-right">
+								<h2>Order Spare Part</h2>
+							</div>
+							<div class="item removeanypadding">
+								<div class="sep"></div>
+								
+								
+								<div class="item item-form-divider item-icon-right marginFive"  ng-click="section_click('additionalsp')">
+									<h2>Additional Replacement Part</h2>
+									<i class="icon ion-ios7-plus-outline" ng-hide="show_section.additionalsp"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.additionalsp"></i>
+								</div>
+								<div ng-init="show_section.additionalsp = 'true'" ng-show="show_section.additionalsp" class="removeanypadding marginTen">
+									<div class="row responsive-lg">
+										<div class="col marginBot0">
+											<div class="list">
+												<label class="item item-input item-select item-select-break">
+													<div class="input-label">
+														Part Description
+													</div>
+													<select data-ng-model='u_spare_parts' ng-init="spareParts.u_replacement_part_text = ''" ng-change='onAdditionalSparePartChange(u_spare_parts)' data-ng-options="item as item.u_replacement_part_text for item in uniquedefectList | orderBy:'u_replacement_part_text'">
+														<option value="" selected>-- Select --</option>
+													</select> </label>
+												<label class="item item-input item-stacked-label">
+													<div class="input-label">
+														Spare Part Number
+													</div>
+													<input type="text" readonly="readonly" ng-init="spareParts.u_spare_part_add = ''" data-ng-model='spareParts.u_spare_part_add' value="{{spareParts.u_spare_part_add}}" />
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">Total Quantity</span>
+													<input ng-model="spareParts.u_quantity_add" placeholder='0' type="tel" maxlength="2">
+												</label>
+											</div>
+										</div>
+									</div>
+
+									<div id="space-for-buttons2"></div>
+									<div id="space-for-buttons3"></div>
+                                    <div id="space-for-buttons4"></div>
+                                    <div id="space-for-buttons5"></div>
+
+									<div align="center" class="row col  marginBot30">
+										<addadditionalorder></addadditionalorder>
+										<removeadditionalorder></removeadditionalorder>
+									</div>
+								</div>
+								<div class="item item-form-divider item-icon-right marginFive" ng-click="section_click('shippingdetails')">
+									<h2>Shipping Details</h2>
+									<i class="icon ion-ios7-plus-outline" ng-hide="show_section.shippingdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.shippingdetails"></i>
+								</div>
+								<div ng-show="show_section.shippingdetails" class="removeanypadding marginTen">
+									<div class="row responsive-lg">
+										<div class="col marginBot0">
+											<div class="list">
+												<label class="item item-input item-stacked-label"  ng-class="isInvalidCheck('spareParts.u_ship_to') ? 'has-error' : 'has-success'"> <span class="input-label">Ship To</span>
+													<input type="tel" ng-model="spareParts.u_ship_to" maxlength="10" ng-blur="validateShipTo(spareParts.u_ship_to)"/>
+												</label>
+												<label class="item item-input item-stacked-label"> <span class="input-label" style="white-space:normal; max-width:100%; width:100%">Delivery Address (if different than ship to) and Notes</span> 													<textarea rows="4" cols="5" ng-model="spareParts.u_delivery_address"></textarea> </label>
+												<label class="item item-input item-stacked-label"> <span class="input-label">CSC Email Address</span>
+													<input readonly="readonly" ng-model="spareParts.u_csc_mail_address" value='{{spareParts.u_csc_mail_address}}' type="text" />
+												</label>
+
+												<label class="item item-input item-stacked-label"> <span class="input-label">Additional Email ID</span>
+													<!--<input ng-model="spareParts.u_email" type="email" /> -->
+                                                    <input ng-model="spareParts.u_email" type="email" validate-email id="email">
+												</label>
+
+												<li class="item item-checkbox">
+													<label class="checkbox">
+														<input ng-model="spareParts.u_critical" ng-change="onSparePartCritical(spareParts.u_critical)" type="checkbox">
+													</label>
+													Critical
+												</li>
+
+												<label class="item item-input item-stacked-label" ng-class="isInvalidCheckDt('spareParts.u_expected_date') ? 'has-error' : 'has-success'"> <span class="input-label">Expected Delivery Date</span>
+													<input ng-disabled="spareParts.u_critical" ng-model="spareParts.u_expected_date" value='{{spareParts.u_expected_date}}' type="date" />
+												</label>
+												<label class="item item-input item-select item-select-break">
+													<div class="input-label">
+														Order Status
+													</div> <
+													<select ng-disabled='true' data-ng-model='spareParts.u_order_status'>
+														<!--<select ng-disabled='true' disabled="disabled"  data-ng-model='spareParts.u_order_status'>-->
+														<option value="new">New</option>
+														<option value="ordered">Ordered</option>
+														<option value="delivered">Delivered</option>
+													</select> </label>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								
+								
+								<div align="center" class="margin30">
+									<div class="row">
+										<div class="col">
+											<button ng-click="onSparePartsUpload()" class="button button-small button-positive button-same-size">
+												Place Order
+											</button>
+											<!--
+											<button ng-click="onSparePartsUploadCancel()" class="button button-small button-positive button-same-size">
+											Cancel
+											</button>-->
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sep"></div>
+						</div>
+					</div>				
+		</form>
+	</ion-content>
+</ion-view>

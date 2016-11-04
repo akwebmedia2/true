@@ -1,0 +1,50 @@
+﻿<ion-view>
+	<ion-content has-header="false" has-tabs="false" padding="true" scroll="true">
+		<!-- <div style="padding: 5px;background: lightgray;"> -->
+		<div class="item item-input-inset">
+			<div class="item-input-wrapper">
+				<input type="search"
+				placeholder="Filter/Search items..."
+				ng-model="$parent.search">
+			</div>
+		</div>
+		<ion-item ng-click="showDefectCategory(searchItem)" ng-if="search.length>3" ng-repeat="searchItem in searchItems | filter:search" item="item">
+			<h3><b>#1</b> : {{ searchItem.u_defect_category1 }}</h3>
+			<h3><b>#3</b> : {{ searchItem.u_defect_category2 }}</h3>
+			<h3><b>#3</b> : {{ searchItem.u_defect_category3 }}</h3>
+		</ion-item>
+		<!-- </div> -->
+		<ion-list>
+			<div ng-repeat="group in items">
+				<ion-item class="item-stable"
+				ng-click="toggleGroup(group)"
+				ng-class="{active: isGroupShown(group)}">
+					<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+					&nbsp;
+					{{group.u_defect_category1}}
+				</ion-item>
+				<ion-item class="item-accordion removeanypadding whiteBg"
+				ng-repeat="item in group.groupedItems"
+				ng-show="isGroupShown(group)">
+					<a class="item-icon-right" ng-click="showDefectCategory(item)">
+					<div class="row paddingLeft10">
+						<div class="col txtElipsis">
+							<b>#2</b> {{item.u_defect_category2}}
+						</div>
+					</div>
+					<div class="row paddingLeft10">
+						<div class="col txtElipsis">
+							<b>#3</b> {{item.u_defect_category3}}
+						</div>
+					</div> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+			</div>
+		</ion-list>
+		<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+	</ion-content>
+</ion-view>
+<style type="text/css">
+	.scroll-infinite {
+		Background:#fff
+	}
+</style>

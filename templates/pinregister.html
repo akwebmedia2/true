@@ -1,0 +1,24 @@
+﻿<ion-view>
+	<ion-content has-header="false" has-tabs="false" padding="false" class="loginContainer marginTop10">
+		<div align="center" class="list padding15">
+			<div class="row text-center">
+				<div class="col">
+					<img src="img/ge-logo.png" width="60" />
+					<br>
+					<h5 class="truesense">TrueSense</h5>
+					<h5 class="regPass">Register Passcode</h5>
+					<h5 class="pinErrorMsg" ng-bind="pinregwrong" ng-if="pinregwrong !=''"></h5>
+				</div>
+			</div>
+			<label class="item item-input item-floating-label"> <span class="input-label">Enter Passcode</span>
+				<input ng-model="pinregister.enter" maxlength="4"  type="password" pattern="[0-9]*" inputmode="numeric" placeholder="Enter Passcode">
+			</label>
+			<label class="item item-input item-floating-label"> <span class="input-label">Re-enter Passcode</span>
+				<input ng-model="pinregister.reenter" maxlength="4"  type="password" pattern="[0-9]*" inputmode="numeric" placeholder="Re-enter Passcode">
+			</label>
+			<button ng-click="doRegisterPin(pinregister)" class="button button-block button-positive">
+				Register
+			</button>
+		</div>
+	</ion-content>
+</ion-view>

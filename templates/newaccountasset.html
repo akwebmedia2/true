@@ -1,0 +1,325 @@
+﻿<ion-view>
+	<ion-content has-header="true" delegate-handle="myScroll" padding="true">
+		<div id="openTicketCheckPhone" class="show-for-small-down"></div>
+ <div style="text-align:right;">		
+                         <!-- <button ng-click="Separatecam()" ng-if="SeperateCamBtn"  class="button button-small button-positive paddingTenMarTen">		
+								Separate CAM & CM
+							</button>
+                             <button ng-click="Separatecam()" ng-if="!SeperateCamBtn" class="button button-small button-positive paddingTenMarTen">		
+								Hide Separate CAM & CM
+							</button>-->
+                         <button ng-click="EditExistingAsset()" ng-if="ExistBtn"  class="button button-small button-positive paddingTenMarTen">		
+								Existing Asset
+							</button>
+                             <button type="submit" ng-click="EditExistingAsset()" ng-if="!ExistBtn" class="button button-small button-positive paddingTenMarTen">		
+								Hide Existing Asset
+							</button>
+                          </div>
+
+		<form name="newticketform" id="newticketform" novalidate="novalidate"  on-valid-submit="doLogin()" class="marginTop0">
+			<div class="list">
+				<div class="item item-form-divider item-icon-right" ng-init="show_section.ticketinformation = true" ng-click="section_click('ticketinformation')">
+					<h2>Extend CR</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.ticketinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.ticketinformation"></i>
+				</div>
+                
+                
+				<div ng-show="show_section.ticketinformation" class="item removeanypadding">
+
+  <div class="item removeanypadding" ng-if="!ExistBtn">
+                    <div class="row">
+						<div class="col">
+                
+                 <label ng-class="isInvalid('newaccountform.searchAssetNumber') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Asset Number</span>
+								 <input type="tel"  placeholder="Filter/Search items..." ng-model="newaccountform.searchAssetNumber"  ng-change="updateFilterData(newaccountform.searchAssetNumber)" ng-blur="removeFilter()">						
+							</label>	
+                                       
+                        
+                        
+                        <ion-item ng-click="setExistingData(searchItem.u_asset_number)" class="item-icon-right" ng-repeat="searchItem in filtered = (matching_regions | filter:search | orderBy:'+u_asset_number' ) | limitTo:15" item="item" ng-if="showAssetList">
+					<h3>{{ searchItem.u_asset_number }}</h3>
+					
+				</ion-item>
+                
+                </div>
+                </div>
+                </div>
+                
+                <!--
+                 <div class="item removeanypadding" ng-if="!SeperateCamBtn">
+                    <div class="row">
+						<div class="col">
+                
+                 <label ng-class="isInvalid('newaccountform.searchAssetNumber') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">CAM&CM Type Asset No.</span>
+                
+                 <select ng-change="CamCMChange()" ng-model="newaccountform.SepCamVal" ng-options="option.u_asset_number as option.u_asset_number for option in CamList">
+							<option value="" selected>-- Select --</option>
+
+						</select>
+                 
+                 					
+							</label>	
+                                       
+                 
+                </div>
+                </div>
+                </div>-->
+                    
+					<div class="row responsive-md">
+						<div class="col">
+                         <label ng-class="isInvalidShip('newaccountform.u_ship_to') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Ship To</span>
+								<input ng-model="newaccountform.u_ship_to" type="text" ng-change="onShiptoChng(newaccountform.u_ship_to)" ng-blur="shiptovalidate(newaccountform.u_ship_to)" my-maxlength="5" id="shipTo" />								
+							</label>	
+                       
+                        </div>
+                        <div class="col">
+                        
+                        <label ng-class="isInvalid('newaccountform.u_sold_to__') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Sold To #</span>
+								<input ng-disabled="isShipToChange" ng-model="newaccountform.u_sold_to__" type="text"  maxlength="40" />								
+							</label>
+                     </div>       
+                       </div>
+                       <div class="row responsive-md">
+                        <div class="col">  
+                        
+                        <label ng-class="isInvalid('newaccountform.u_account_name') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Account Name</span>
+								<input ng-disabled="isShipToChange" ng-model="newaccountform.u_account_name" type="text"  maxlength="40" />								
+							</label>	
+                            
+                         </div>
+                        <div class="col">   
+                             <label ng-class="isInvalid('newaccountform.u_city') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">City</span>
+								<input ng-model="newaccountform.u_city" type="text" maxlength="40" ng-disabled="isShipToChange" />
+							</label>	
+                           
+                        </div>
+                        </div>
+                        <div class="row responsive-md">
+                        <div class="col">
+                         <label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							State
+						</div>
+						<select  ng-disabled="isShipToChange" ng-model="newaccountform.u_state" ng-options="option.State as option.State for option in statesList  | orderBy:'State'">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>		
+                       
+                        </div>
+                        <div class="col">
+                        <label ng-class="isInvalid('newaccountform.u_country') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Country
+						</div>
+						<select ng-disabled="isShipToChange" ng-model="newaccountform.u_country" ng-options="option.value as option.label for option in countryList  | orderBy:'label'" ng-change="countryChange()">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>	
+                        </div>
+                           </div>
+                           <div class="row responsive-md">
+                            <div class="col">
+                            <label ng-class="isInvalid('newaccountform.u_pole') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Pole
+						</div>
+						<select ng-disabled="isShipToChange" ng-model="newaccountform.u_pole" ng-options="option.value as option.label for option in poleList">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>		
+                            </div>
+                             <div class="col">
+                           <label ng-class="isInvalid('newaccountform.u_system_name') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">System Name</span>
+								<input ng-model="newaccountform.u_system_name" type="text"  maxlength="40" />								
+							</label>	 
+                        </div>
+                        </div>
+                         <div class="row responsive-md">
+                            <div class="col">
+                        <label ng-class="isInvalid('newaccountform.u_asset_type') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Asset Type
+						</div>
+						<select ng-model="newaccountform.u_asset_type" ng-options="option.value as option.label for option in assetType" ng-change="assetTypeUpdate(newaccountform.u_asset_type)">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>		
+                        </div>
+                          <div class="col" ng-class="{'serial-error': serialErrorElect}">
+                        <label ng-class="isInvalid('newaccountform.u_cam_electronics_serial_no') ? 'error' : 'success'" class="item item-input item-stacked-label"> <span class="input-label">Electronics Serial No.</span>
+								<input ng-model="newaccountform.u_cam_electronics_serial_no" type="tel" maxlength="8" />								
+							</label>	
+                           </div>
+                           </div>
+                            <div class="row responsive-md">
+                            <div class="col"  ng-class="{'serial-error': serialErrorFlui}">
+                         <label  ng-class="isInvalid('newaccountform.u_fluidics_serial_no') ? 'error' : 'success'" class="item item-input item-stacked-label"> <span class="input-label">Fluidics Serial No.</span>
+								<input ng-model="newaccountform.u_fluidics_serial_no" type="tel" maxlength="8" />								
+							</label>   
+                        </div>
+                         <div class="col"  ng-class="{'serial-error': serialErrorCont}">
+                        <label  ng-class="isInvalid('newaccountform.u_controller_serial_id') ? 'error' : 'success'" class="item item-input item-stacked-label"> <span class="input-label">Controller Serial No.</span>
+								<input ng-model="newaccountform.u_controller_serial_id" type="tel" maxlength="8" />								
+							</label>							
+						</div>
+                        </div>
+                        <div class="row responsive-md">
+                         <div class="col"  ng-class="{'serial-error': serialErrorIcc}">
+							<label ng-class="isInvalid('newaccountform.u_icc_skid_serial_no') ? 'error' : 'success'" class="item item-input item-stacked-label"> <span class="input-label">ICC Skid Serial No.</span>
+								<input ng-model="newaccountform.u_icc_skid_serial_no" type="tel" maxlength="8" />								
+							</label>	
+                        </div>
+                         <div class="col">
+                        <label ng-class="isInvalid('newaccountform.u_operational_status') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Operational Status
+						</div>
+						<select ng-model="newaccountform.u_operational_status" ng-options="option.value as option.label for option in operationalVal">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>		
+                        </div>
+                        </div>
+                    
+                    <div class="row responsive-md">
+						<div class="col">
+                        
+                        <label ng-class="isInvalid('newaccountform.u_controller_type') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Controller Type
+						</div>
+						<select ng-model="newaccountform.u_controller_type" ng-options="option.value as option.label for option in controllerval | orderBy:['label']">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>		
+													
+						</div>
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">GE SAP PO #</span>
+								<input ng-model="newaccountform.u_ge_sap_po__" type="text"  maxlength="40" />								
+							</label>							
+						</div>
+					</div><!--End of Row -->
+                    
+                    <div class="row responsive-md">
+						
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Opened by</span>
+								<input ng-model="newaccountform.opened_by" type="text" readonly="readonly" />								
+							</label>						
+						</div>
+                      <div class="col">
+								
+                            
+                            
+                            <label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Cooler Option
+						</div>
+						<select ng-model="newaccountform.u_cooler">
+							<option value="" selected>-- Select --</option>
+							<option value="no">No</option>
+                            <option value="yes">Yes Original</option>
+                            <option value="retrofit">Yes with Retrofit</option>
+						</select> </label>                            
+                            	
+					</div>                 
+                    
+                   
+                   </div><!--End of Row --> 
+                    
+                     <div class="row responsive-md">
+						
+						<div class="col">
+							 <label class="item item-input item-select item-select-break">
+                            <div class="input-label">
+                                Stage
+                            </div>
+						<select ng-model="newaccountform.u_stage" ng-disabled="true" >
+							<option value="" selected>Open</option>
+                           
+                            <option value="Approval">Pending Approval</option>
+                            <option value="Closed">Closed</option>
+                            <option value="Escalate">Escalate</option>
+                            <option value="closed-rejected">Closed Rejected</option>
+						</select> </label>						
+						</div>                     
+                    </div>
+                    
+                    
+                     <div class="row responsive-md">
+						
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Short Description</span>
+								<input ng-model="newaccountform.u_short_description" type="text" maxlength="100" />
+							</label>							
+						</div>
+					</div><!--End of Row -->
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            </div>        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                  
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('defectinformation')">
+					<h2>Reference Data</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.defectinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.defectinformation"></i>
+				</div>
+				
+                
+                <div ng-show="show_section.defectinformation" class="item removeanypadding">
+					 <div class="row responsive-md">						
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Transfer Date</span>
+								<input ng-model="newaccountform.u_transfer_date" type="date" />								
+							</label>							
+						</div>
+                        <div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Asset No</span>
+								<input ng-model="newaccountform.u_asset_no" type="text"  maxlength="40" />								
+							</label>							
+						</div>
+					</div><!--End of Row -->
+                     <div class="row responsive-md">						
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">WBS No</span>
+								<input ng-model="newaccountform.u_wbs_no" type="text"  maxlength="40" />
+                                <input type="hidden" ng-model="depreciatedflag" />							
+							</label>							
+						</div>
+                       
+					</div><!--End of Row -->
+				</div>
+                
+			
+				
+				
+				<div class="sep"></div>
+			</div>
+<div class="margin30" align="center">
+				<div class="row">
+					<div class="col">
+						<button type="submit" ng-click="ticketSubmit()" class="button button-small button-positive" style="padding:7px;">
+							Submit for Execution
+						</button>
+						<button ng-click="ticketCancel()" class="button button-small button-positive button-same-size">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,401 @@
+﻿<ion-view>
+	<ion-content has-header="true" has-tabs="false" padding="true">
+    <div style="text-align:right; padding:10px;" class="hide-for-small-down">		
+                         <button type="submit" ng-click="newTicketAcHierarchy()" class="button button-small button-positive" style="margin-right:10px; padding:0 6px;">		
+								New Ticket		
+							</button>
+                            <button ng-click="createLogIssueAcHierarchy()" class="button button-small button-positive" style="margin-right:10px; padding:0 6px;">		
+								Log Issue		
+							</button>
+                            <button ng-click="correctAccount()" class="button button-small button-positive" style="margin-right:5px; padding:0 6px;">		
+								Correction
+							</button>   
+                            <button ng-click="serviceReport()" class="button button-small button-positive" style="margin-right:5px; padding:0 6px;">		
+								Service Report
+							</button>                        
+     </div>
+     <div style="text-align:center; padding:10px;" class="show-for-small-down">		
+                         <button type="submit" ng-click="newTicketAcHierarchy()" class="button button-small button-positive" style="margin-right:10px; padding:0 6px;">		
+								New Ticket		
+							</button>
+                            <button ng-click="createLogIssueAcHierarchy()" class="button button-small button-positive" style="margin-right:10px; padding:0 6px;">		
+								Log Issue		
+							</button>
+                            <button ng-click="correctAccount()" class="button button-small button-positive" style="margin-right:5px; padding:0 6px;">		
+								Correction
+							</button>   
+                          </div>
+     <div style="text-align:center; padding:10px;"  class="show-for-small-down">		
+                              <button ng-click="serviceReport()" class="button button-small button-positive" style="margin-right:5px; padding:0 6px;">		
+								Service Report
+								</button>
+      </div>
+		<div class="item item-form-divider item-icon-right achierarHead" ng-click="section_click('accountHierarchy')">
+			<h2 class="topMargin7">Account Hierarchy</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.accountHierarchy"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.accountHierarchy"></i>
+		</div>
+		<div ng-show="show_section.accountHierarchy" class="whiteBg achierarHead" style="padding-bottom:1px;">
+			<div class="row responsive-md">
+				<div class="col">
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Account name</span>
+						<input ng-model="details.u_account_name"  type="text" ng-disabled="!accessibility.enable_account_hierarchy_edit">
+					</label>
+				</div>
+				<div class="col">
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Pole</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_pole"  type="text">
+					</label>
+				</div>
+			</div>
+            <div class="row responsive-md">
+            <div class="col">
+							<label ng-class="isInvalid('newaccountform.u_country') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Country
+						</div>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_country"ng-options="option.country as option.country for option in countryList  | orderBy:'country'">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>	
+                    
+				</div>
+            
+            
+            
+            <div class="col">
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">State</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_state" type="text">
+					</label>
+				</div>
+            
+            
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+			<div class="row responsive-md">
+            	<div class="col">
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">City</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_city" type="text">
+					</label>
+				</div>
+				<div class="col">
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Sold to #</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="text" ng-model="details.u_sold_to">
+					</label>
+				</div>			
+			</div>
+			<div class="row responsive-md">
+				<div class="col">
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Ship to </span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_ship_to" type="text">
+					</label>
+				</div>
+                <div class="col">
+				<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">System name </span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_system_name"  type="text">
+					</label>
+                    </div>
+			</div>
+			<div class="row responsive-md">
+            <div class="col">
+					<label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Asset type
+						</div> <!--<input ng-disabled="!isAccountHierEdit" ng-model="details.u_controller_type"  type="text">-->
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_asset_type"  ng-options="option.value as option.label for option in assetType">
+							<option value="" selected>-- Select --</option>
+						</select> </label>
+				</div>
+				<div class="col">
+					<!--<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">DUNS Number</span>
+						<input ng-disabled="!isAccountHierEdit" type="text" ng-model="details.u_duns_number">
+					</label>-->
+                    <label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Asset Number</span>
+						<input ng-disabled="!isAccountHierEdit" type="text" ng-model="details.u_asset_number">
+					</label>
+				</div>
+				
+			</div>
+			<div class="row responsive-md">				
+				
+                <div class="col" style="margin:0px; padding:0px;"></div>
+			</div>
+			<label class="item item-input item-stacked-label achierarHead2"> <span class="input-label removeBoldFont">Notes</span> 				
+				<textarea ng-disabled="!accessibility.enable_account_hierarchy_edit" class="fullwidth" rows="6" ng-model="details.u_notes">
+					</textarea> </label>
+		</div><div class="sep"></div>
+		<div class="item item-form-divider item-icon-right achierarHead" ng-click="section_click('systemmodule')">
+			<h2 class="topMargin7">System/Module</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.systemmodule"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.systemmodule"></i>
+		</div>
+		<div ng-show="show_section.systemmodule" class="whiteBg achierarHead">
+			<div class="row responsive-lg">
+				<div class="col">
+					
+					<label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Controller type
+						</div> <!--<input ng-disabled="!isAccountHierEdit" ng-model="details.u_controller_type"  type="text">-->
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_controller_type"  ng-options="option.value as option.label for option in controllerval">
+							<option value="" selected>-- Select --</option>
+						</select> </label>
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Electronics Serial Number</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_cam_serial_number"  type="text">
+					</label>
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Fluidics Serial Number</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_fluidics_serial_number"  type="text">
+					</label>
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Controller Serial Number</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_controller_serial_id"  type="text">
+					</label>
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">ICC Skid Serial Number</span>
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_icc_skid_serial_number"  type="text">
+					</label>
+
+					<input style="display: none;" ng-model="details.sys_id" type="text">
+					<input style="display: none;" ng-model="details.currentUTCDate" type="text">
+
+					<label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Operational Status
+						</div>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit"  ng-change="operationalStatusChange()"  ng-model="details.u_operational_status" ng-options="option.value as option.label for option in operationalVal">
+							<option value="" selected>-- Select --</option>
+
+						</select> </label>
+
+					<label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							DCS Connection
+						</div>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_dcs_connection" ng-options="option.value as option.label for option in dcsConnectionVal">
+							<option value="" selected>-- Select --</option>
+						</select> </label>
+                        
+                        <label class="item item-input item-select item-select-break">
+						<div class="input-label">
+							Filter
+						</div>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_dcs_connection" ng-options="option.value as option.label for option in dcsConnectionVal">
+							<option value="" selected>None</option>
+                            <option value="Judo" selected>Judo</option>
+                            <option value="Other" selected>Other</option>
+						</select> </label>
+                        
+					<!--
+					<label class="item item-input item-stacked-label"> Operational Status
+					<input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_operational_status"  type="text">
+					<input style="display: none;" ng-model="details.sys_id" type="text">
+					</label>-->
+
+				</div>
+				<div class="col">
+					<div class="row responsive-lg" style="padding-top:0px; padding-bottom:0px;">
+						<div class="col">
+							<div class="item item-checkbox" style="border:none">
+								<label class="checkbox">
+									<input ng-disabled="!accessibility.enable_account_hierarchy_edit"  type="checkbox" ng-model="details.u_hw_kits" ng-checked="details.u_hw_kits" />
+								</label>
+								Hardware Kits
+							</div>
+						</div>
+						<div class="col">
+							<div class="item item-checkbox" style="border:none">
+								<label class="checkbox">
+									<input ng-disabled="!accessibility.enable_account_hierarchy_edit"  type="checkbox" ng-model="details.u_electrical_cover_box" ng-checked="details.u_electrical_cover_box" />
+								</label>
+								Electrical Cover Box
+							</div>
+						</div>
+					</div>
+					<div class="row"  style="padding-top:0px; padding-bottom:0px;">
+						<div class="col">
+
+							<div class="item item-checkbox" style="border:none">
+								<label class="checkbox">
+									<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="checkbox" ng-model="details.u_ethernet_kits" ng-checked="details.u_ethernet_kits" />
+								</label>
+								Ethernet Kits
+							</div>
+						</div>
+					</div>
+					<br />
+					<label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">CAM Firmware Rev</span> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_ts2_firmware_rev" type="text"> -->
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_ts2_firmware_rev">
+							<option value="">-- Select --</option>
+							<option value="1.04">1.04</option>
+							<option value="1.06">1.06</option>
+							<option value="1.07">1.07</option>
+							<option value="1.08">1.08</option>
+							<option value="1.09">1.09</option>
+                            <option value="1.10">1.10</option>
+                            <option value="1.11">1.11</option>
+
+						</select> </label>
+
+					<label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">Temperature C or F</span>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_temperature_c_or_f" >
+							<option value="">-- Select --</option>
+							<option value="No">No</option>
+							<option value="C">C</option>
+							<option value="F">F</option>
+						</select> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_temperature_c_or_f" type="text"> --> </label>
+
+					<label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">CM Firmware Rev</span>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_mrc__psc_firmware_rev">
+							<option value="">-- Select --</option>
+							<!--<option value="01.03.30">01.03.30</option>
+							<option value="01.03.35">01.03.35</option>
+							<option value="1.03.030">1.03.030</option>
+							<option value="1.03.033">1.03.033</option>-->
+							<option value="1.03.035">1.03.035</option>
+							<!--<option value="Aquatrac">Aquatrac</option>
+							<option value="Previous">Previous</option>-->
+							<option value="1.03.037">1.03.037</option>
+						</select> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_mrc__psc_firmware_rev" type="text"> --> </label>
+
+					<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Date of Upgrade</span> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_date_of_upgrade"  type="date"> -->
+						<input ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_date_of_upgrade"  type="date">
+					</label>
+
+					<label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">Control Status</span>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_control_status">
+							<option value="">-- Select --</option>
+							<option value="Control">Control</option>
+							<option value="Monitoring">Monitoring</option>
+						</select> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_control_status" type="text"> --> </label>
+
+					<label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">Cooler Option</span>
+						<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_fluidic_cooler_option">
+							<option value="">-- Select --</option>
+							<option value="no">No</option>
+                            <option value="yes">Yes Original</option>
+                            <option value="retrofit">Yes with Retrofit</option>
+						</select> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_fluidic_cooler_option" type="text"> --> </label>
+
+					<label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">First commissioning</span>
+						<input ng-model="details.u_dateofcommissing"  type="date" ng-disabled="!isAccountHierEdit">
+						<input style="display:none" type="hidden" ng-model="details.flagofcommissing" />
+					</label>
+				</div>
+
+			</div>
+		</div>
+		<div class="sep"></div>
+		<div class="item item-form-divider item-icon-right achierarHead" ng-click="section_click('commercialdetails')">
+			<h2 class="topMargin7">Commercial Details</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.commercialdetails"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.commercialdetails"></i>
+		</div>
+		<div ng-show="show_section.commercialdetails" class="whiteBg achierarHead">
+			<div class="list">
+				<div class="row responsive-lg">
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">SAP PE No</span>
+							<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="text" ng-model="details.u_sap_pe_no">
+						</label>
+					</div>
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Sales Org</span>
+							<input ng-disabled="!accessibility.enable_account_hierarchy_edit"  type="text" ng-model="details.u_salesorg">
+						</label>
+					</div>
+				</div>
+				<div class="row responsive-lg">
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Ship Date</span>
+							<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="date" ng-model="details.u_ship_date">
+						</label>
+					</div>
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">SalesDistrict ID</span>
+							<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="text" ng-model="details.u_salesdistrictid">
+						</label>
+					</div>
+				</div>
+				<div class="row responsive-lg">
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Region</span>
+							<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="text" ng-model="details.u_region">
+						</label>
+					</div>
+					<div class="col">
+						<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">SalesRegion ID</span>
+							<input ng-disabled="!accessibility.enable_account_hierarchy_edit" type="text" ng-model="details.u_salesregionid">
+						</label>
+					</div>
+				</div>
+
+				<label class="item item-input item-stacked-label achierarHead2"> <span class="input-label removeBoldFont">Contract Details</span> 
+                <textarea class="fullWidth" rows="6" ng-model="details.u_contract_details" ng-disabled="!accessibility.enable_account_hierarchy_edit">
+					</textarea> </label>
+				<div class="row responsive-lg">
+					<div class="col">
+						<label class="item item-input item-select item-select-break">
+							<div class="input-label">
+								Market Sector
+							</div>
+							<select ng-disabled="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_market_sector" ng-options="option.value as option.label for option in marketSectorVal">
+								<option value="" selected>-- Select --</option>
+							</select> </label>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="sep"></div>
+		<div class="item item-form-divider item-icon-right achierarHead" ng-click="section_click('fieldpersonnel')">
+			<h2 class="topMargin7">Field Personnel</h2>
+			<i class="icon ion-ios7-plus-outline" ng-hide="show_section.fieldpersonnel"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.fieldpersonnel"></i>
+		</div>
+		<div class="achierarHead3 whiteBg" ng-show="show_section.fieldpersonnel">
+			<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Account Manager</span>
+				<input readonly type="text" ng-model="details['u_account_manager.name']">
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Name</span>
+				<input readonly type="text" ng-model="details['u_account_manager.name']">
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">User ID</span>
+				<input readonly type="text" ng-model="details['u_account_manager.user_name']">
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Business phone</span>
+				<input readonly type="text" ng-model="details['u_account_manager.phone']">
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Mobile phone</span>
+				<input readonly type="text" ng-model="details['u_account_manager.mobile_phone']">
+			</label>
+			<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Email</span>
+				<input readonly type="text" ng-model="details['u_account_manager.email']">
+			</label>
+		</div>
+		<div class="sep"></div>
+		<div class="margin30" align="center">
+			<div ng-if="accessibility.enable_account_hierarchy_edit == true">
+				<div ng-if="accessibility.isShowControle == 'true'">
+					<div class="row">
+						<div class="col">
+							<button type="submit" ng-click="onUpdateAccountHierarchy()" class="button button-small button-positive button-same-size">
+								Update
+							</button>
+							<button ng-click="onCancelAccountHierarchy()" class="button button-small button-positive button-same-size">
+								Cancel
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	</ion-content>
+</ion-view>

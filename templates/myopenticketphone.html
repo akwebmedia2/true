@@ -1,0 +1,119 @@
+﻿<ion-tabs class="tabs-only tabs-top tabs-dark">
+	<ion-tab padding='true' title="Current">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Current Tickets</h1>
+		</header>
+		<ion-content padding="true" has-header="true">
+			<div class="list">
+				<div class="item item-input-inset">
+					<div class="item-input-wrapper">
+						<input type="search"
+						placeholder="Filter/Search items..."
+						ng-model="$parent.search">
+					</div>
+				</div>
+				<ion-item ng-click="ticketDetailsPage(completedItem,'uploaded')" class="removeanypadding paddingTen" ng-repeat="completedItem in (updatedRecord = (completedItems | filter:search | orderBy: '-opened_at'))">
+					<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b> {{ completedItem.number }}</h3> <h3 class="width80Per"><b>Account Name: </b> {{ completedItem.u_account_name }}</h3> <h3 class="width80Per"><b>Short Description: </b> {{ completedItem.u_short_description }}</h3> <h3><b>Opened At (GMT): </b> {{ completedItem.opened_at }}</h3> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+				<ion-item ng-if="updatedRecord.length == 0">
+					<strong>No ticket found...</strong>
+				</ion-item>
+			</div>
+		</ion-content>
+	</ion-tab>
+	<ion-tab padding='true' title="Pending">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Pending</h1>
+		</header>
+		<ion-content padding="true" has-header="true">
+			<div class="list">
+				<div class="item item-input-inset">
+					<div class="item-input-wrapper">
+						<input type="search"
+						placeholder="Filter/Search items..."
+						ng-model="$parent.search">
+					</div>
+				</div>
+				<ion-item ng-click="ticketDetailsPage(pendingItem,'pending')" class="removeanypadding paddingTen" ng-repeat="pendingItem in (pengingList = (pendingItemsNonGroup | filter:search))">
+					<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b><span ng-if="pendingItem.number" ng-bind='pendingItem.number'></span><span ng-if="!pendingItem.number">Not Generated</span></h3> <h3><b>Account Name: </b> {{ pendingItem.u_account_name }}</h3> <h3><b>Short Description: </b> {{ pendingItem.u_short_description }}</h3> <!-- <h3><b>Opened At (GMT): </b> {{ pendingItem.savedTS }}</h3>  --> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+				<ion-item ng-if="pengingList.length == 0">
+					<strong>No ticket found...</strong>
+				</ion-item>
+			</div>
+		</ion-content>
+	</ion-tab>
+	
+	<ion-tab padding='true' title="Pending Spare Part">
+		<header class="bar bar-header bar-positive">
+			<h1 class="title">Pending Spare Part</h1>
+		</header>
+		<ion-content padding="true" has-header="true">
+			<div class="list">
+				<div class="item item-input-inset">
+					<div class="item-input-wrapper">
+						<input type="search"
+						placeholder="Filter/Search items..."
+						ng-model="$parent.osp_search">
+					</div>
+				</div>
+				<ion-item ng-click="sparePartPage(pendingSPItem)" class="removeanypadding paddingTen" ng-repeat="pendingSPItem in (pengingSPList = (pendingSPItems | filter:osp_search))">
+					<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b><span ng-if="pendingSPItem.number" ng-bind='pendingSPItem.number'></span><span ng-if="!pendingSPItem.u_local_ticket_id">Not Generated</span></h3> <h3><b>Order Number for Spare Part: </b> <span ng-if="pendingSPItem.spare_number" ng-bind='pendingSPItem.spare_number'></span><span ng-if="!pendingSPItem.spare_number">Not Generated</span></h3> <h3><b>Opened By: </b> {{ pendingSPItem.opened_by }}</h3> <h3><b>Ship To: </b> {{ pendingSPItem.u_ship_to }}</h3> <!-- <h3><b>Opened At : </b> {{ pendingSPItem.u_local_save_time }}</h3>  --> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+                <ion-item ng-click="orderPartPage(pendingSPItem)" class="removeanypadding paddingTen" ng-repeat="pendingSPItem in (pengingSPList = (pendingODRSPItems | filter:osp_search))">
+					<a class=" my-item item-icon-right removeanypadding">  <h3><b>Order Number for Spare Part: </b> <span>Not Generated</span></h3> <h3><b>Opened By: </b> {{ pendingSPItem.opened_by }}</h3> <h3><b>Ship To: </b> {{ pendingSPItem.u_ship_to }}</h3> <!-- <h3><b>Opened At : </b> {{ pendingSPItem.u_local_save_time }}</h3>  --> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+				<ion-item ng-if="pendingODRSPItems.length == 0 && pendingODRSPItems.length == 0">
+					<strong>No ticket found...</strong>
+				</ion-item>
+			</div>
+		</ion-content>
+	</ion-tab>
+</ion-tabs>
+<!--
+<ion-tabs class="tabs-only tabs-top tabs-dark">
+<ion-tab title="Current">
+<header class="bar bar-header bar-positive">
+<h1 class="title">Current</h1>
+</header>
+<ion-content has-header="true">
+<div class="list">
+<div class="item item-input-inset">
+<div class="item-input-wrapper">
+<input type="search"
+placeholder="Filter/Search items..."
+ng-model="$parent.search">
+</div>
+</div>
+<ion-item ng-click="ticketDetailsPage(completedItem)" class="removeanypadding paddingTen" ng-repeat="completedItem in (updatedRecord = (completedItems | filter:search | orderBy: '-opened_at'))">
+<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b> {{ completedItem.number }}</h3> <h3 class="width80Per"><b>Account Name : </b> {{ completedItem.u_account_name }}</h3> <h3 class="width80Per"><b>Short Description : </b> {{ completedItem.u_short_description }}</h3> <h3><b>Opened At(GMT) : </b> {{ completedItem.opened_at }}</h3> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+</ion-item>
+<ion-item ng-if="updatedRecord.length == 0">
+<strong>No ticket found...</strong>
+</ion-item>
+</div>
+</ion-content>
+</ion-tab>
+<ion-tab title="Pending Queue">
+<header class="bar bar-header bar-positive">
+<h1 class="title">Pending Queue</h1>
+</header>
+<ion-content has-header="true">
+<div class="list">
+<div class="item item-input-inset">
+<div class="item-input-wrapper">
+<input type="search"
+placeholder="Filter/Search items..."
+ng-model="$parent.search">
+</div>
+</div>
+<ion-item class="removeanypadding paddingTen" ng-repeat="pendingItem in (pengingList = (pendingItems | filter:search))">
+<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b> {{ pendingItem.u_cam_serial_no }}</h3> <h3><b>Account Name: </b> {{ pendingItem.u_account_name }}</h3> <h3><b>Short Description: </b> {{ pendingItem.u_short_description.name }}</h3> <h4>{{ pendingItem.opened_at }}</h4> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+</ion-item>
+<ion-item ng-if="pengingList.length == 0">
+<strong>No ticket found...</strong>
+</ion-item>
+</div>
+</ion-content>
+</ion-tab>
+</ion-tabs>-->

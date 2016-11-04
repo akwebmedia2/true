@@ -1,0 +1,45 @@
+﻿<ion-header-bar id="appHeader" ng-class="onofflineclass" class="bar bar-header bar-light">
+	<div ng-model="showBackButton" ng-if="showBackButton !=''" >
+		<a ng-click="onBackPress()" class="button icon-left ion-chevron-left button-clear button-dark backIcon"></a>
+		<a href="#/event/home"  class="button icon-left ion-ios7-home button-clear button-dark homeIcon"></a>
+	</div>
+	<img ng-bind="showLogo" ng-if="showLogo !=''" src="img/ge-logo.png" height="36" class="geLogo"  />
+	<h1 class="title pageTitle"><b ng-bind='app_page_title'></b><b ng-bind='app_page_title_subtitle'> </b></h1>
+    
+	<a ng-click="logout()" style="position:absolute; right:5px; top:5px;" class="button icon-right ion-log-out button-clear button-dark"></a>
+    <span style="position:absolute; right:47px; top:13px;" class="hide-for-small">Country: <span ng-if="usersCountryCode">{{usersCountryCode}}</span> <span ng-if="!usersCountryCode">All</span></span>
+</ion-header-bar>
+<ion-side-menus>
+	<ion-side-menu-content>
+		<ion-nav-bar class="bar-positive"animation="no-animation">
+			<ion-nav-back-button class="button-icon ion-arrow-left-c"></ion-nav-back-button>
+		</ion-nav-bar>
+		<ion-nav-view animation="no-animation" name="menuContent"></ion-nav-view>
+	</ion-side-menu-content>
+	<ion-side-menu side="none">
+		<ion-content>
+			<ul align="center" class="list homeMenuss">
+				<a href="#/event/openticket" class="item" menu-close> <img src="img/new-ticket.png"  height="70" /> <h3>Create New Ticket</h3> </a>
+                <a href="#/event/home" class="item" menu-close> <img src="img/open-ticket.png"  height="70" /> <h3>My Open Tickets</h3> </a>				
+                <a href="#/event/logissue" class="item" menu-close> <img src="img/log-ticket.png"  height="70" /> <h3>Log an Issue</h3> </a>
+                <a href="#/event/closedticket" class="item" menu-close> <img src="img/close-ticket.png"  height="70" /> <h3>Closed Tickets</h3> </a> 
+                
+                <a href="#/event/servicereport" class="item" menu-close> <img src="img/create-report.png"  height="70" /> <h3>Create Service Report</h3> </a>
+                <a href="#/event/myservicereport" class="item" menu-close> <img src="img/service-report.png"  height="70" /> <h3>My Service Reports</h3> </a>
+				
+                <a href="#/event/ordersparepart" class="item" menu-close> <img src="img/order-spare.png"  height="70" /> <h3>Order Spare Part</h3> </a>
+                <a href="#/event/myordersparepart" class="item" menu-close> <img src="img/my-orders.png"  height="70" /> <h3>My Orders</h3> </a>
+				<a href="#/event/correctaccount" class="item" menu-close> <img src="img/correction.png"  height="70" /> <h3>Correct Account/Asset</h3> </a>               
+				
+                <a href="#/event/newaccountasset" class="item" menu-close> <img src="img/new-asset.png"  height="70" /> <h3>New Account/Asset</h3></a>
+                <a href="#/event/openaccountasset" class="item" menu-close> <img src="img/open-asset.png"  height="70" /> <h3>My Open Account/Asset</h3> </a>
+				<a href="#/event/groupassignedticket" class="item" menu-close> <img src="img/group-ticket.png"  height="70" /> <h3>Group Assigned Tickets</h3> </a>
+				<a href="#/event/accounthierarchy" class="item" menu-close> <img src="img/hierarchy.png"  height="70" /> <h3>Account Hierarchy</h3> </a>
+				<!--<a id="dashboardaccessmod_defect_hierarchy" href="#/event/defectcategory" class="item" menu-close> <img src="img/defect-category.png"  height="70" /> <h3>Defect Category</h3> </a>-->
+				<a href="#/event/settings" class="item" menu-close> <img src="img/setting.png"  height="70" /> <h3>Settings</h3> </a>
+				<a href="#/event/feedback" class="item" menu-close> <img src="img/feedback.png"  height="70" /> <h3>Feedback</h3> </a>
+               
+			</ul>
+		</ion-content>
+	</ion-side-menu>
+</ion-side-menus>

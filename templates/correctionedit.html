@@ -1,0 +1,278 @@
+﻿<ion-view>
+	<ion-content padding="true" has-header="true">
+		<div id="openTicketCheckPhone" class="show-for-small-down"></div>
+		<form name="newticketform" id="newticketform" novalidate="novalidate" onkeypress="return event.keyCode != 13;" on-valid-submit="doLogin()" class="marginTop0">
+			<div class="list">
+				<div class="item item-form-divider item-icon-right" ng-init="show_section.customerinformation = true" ng-click="section_click('customerinformation')">
+					<h2>Customer Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.customerinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.customerinformation"></i>
+				</div>
+				<div ng-show="show_section.customerinformation" class="item removeanypadding">
+					<div class="paddingTen">
+						<label ng-class="isInvalid('ticketform.u_city') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label padding20"> <i class="icon ion-search placeholder-icon"></i> <span class="input-label">City</span> <!-- <input type="search" ng-keyup="onSearchKeyword()" ng-model="cityserach.keyword"  placeholder="Search City..." /> -->
+							<input type="text" ng-keyup="onSearchKeyword()" ng-model="cityserach.keyword"  placeholder="Search City..." />
+							<input type="text" ng-model="ticketform.u_city"  class="hideElement" />
+						</label>
+						<div class="padding20 lightGreyBg">
+							<ion-item ng-click="onCitySelected(city)" ng-if="cityserach.showList && cityserach.keyword.length>3" ng-repeat="city in (filteredPersons =(cities | customFilter:cityserach.keyword))">
+								<a> {{city.currentItem.u_city}} </a>
+							</ion-item>
+							<ion-item ng-if="filteredPersons.length == 0">
+								<strong>No city found...</strong>
+							</ion-item>
+						</div>
+					</div>
+
+					<div class="row responsive-lg">
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_account_name') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Account Name
+								</div>
+								<select ng-disabled="!itemsAN || itemsAN.length<=0 || itemsAN.length == 0" data-ng-model='ticketform.u_account_name' ng-change='onAccountNameChange()' data-ng-options='item as item for item in itemsAN'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+						<div class="col">
+							<label ng-class="isInvalid('ticketform.u_ship_sold_to') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Ship To
+								</div>
+								<select ng-disabled="!itemsST || itemsST.length<=0 || itemsST.length == 0" data-ng-model='ticketform.u_ship_sold_to' ng-change='onShipToChange()' data-ng-options='item as item for item in itemsST'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+					</div>
+				</div>
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right"  ng-init="show_section.equipmentinformation = true" ng-click="section_click('equipmentinformation')">
+					<h2>Equipment Information</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.equipmentinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.equipmentinformation"></i>
+				</div>
+				<div ng-show="show_section.equipmentinformation" class="item removeanypadding">
+					<div class="row responsive-lg">
+						<div class="col">
+							<div class="list card removeanypadding">
+								<div class="item lightGreyBg">
+									<h3>Add System Name</h3>
+								</div>
+
+								<div class="item item-body removeanypadding">
+									<label class="item item-radio">
+										<input id="systemNameCorrectionRadio" type="radio" ng-model="radio.systemName" ng-value="0" name="group2">
+										<div class="item-content">
+											Correction
+										</div> <i class="radio-icon ion-checkmark"></i> </label>
+									<label class="item item-radio">
+										<input id="systemNameCurrentRadio" type="radio" ng-model="radio.systemName" ng-value="1" name="group2">
+										<div class="item-content">
+											Current
+										</div> <i class="radio-icon ion-checkmark"></i> </label>
+								</div>
+
+								<div class="item removeanypadding">
+									<div>
+										<label ng-class="isInvalid('ticketform.u_master_asset_tag_no') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+											<div class="input-label">
+												System Name
+											</div>
+											<select ng-disabled="!itemsSN || itemsSN.length<=0 || itemsSN.length == 0" data-ng-model='ticketform.u_master_asset_tag_no' ng-change='onSystemNameChange()'  data-ng-options="item as item for item in itemsSN | orderBy:'toString()'">
+												<option value="" selected>-- Select --</option>
+											</select> </label>
+									</div>
+									<div ng-show="radio.systemName == '0'">
+										<label ng-class="isInvalid('ticketform.u_system_name_correction') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">New System Name</span>
+											<input data-ng-model='ticketform.u_system_name_correction' type="text" placeholder="Name">
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="list card removeanypadding">
+								<div class="item lightGreyBg">
+									<h3>Add Controller Type</h3>
+								</div>
+
+								<div class="item item-body removeanypadding">
+									<label class="item item-radio">
+										<input id="controllerTypeCorrectionRadio" ng-model="radio.controllerType" value="0"  type="radio" name="group">
+										<div class="item-content">
+											Correction
+										</div> <i class="radio-icon ion-checkmark"></i> </label>
+									<label class="item item-radio">
+										<input id="controllerTypeCurrentRadio" ng-model="radio.controllerType" value="1" type="radio"  name="group">
+										<div class="item-content">
+											Current
+										</div> <i class="radio-icon ion-checkmark"></i> </label>
+								</div>
+
+								<div class="item removeanypadding">
+									<div>
+										<label ng-class="isInvalid('ticketform.u_controller_type') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+											<div class="input-label">
+												Controller Type
+											</div>
+											<select ng-disabled="!itemsCT || itemsCT.length<=0 || itemsCT.length == 0" ng-change='onControllerTypeChange()' data-ng-model='ticketform.u_controller_type' data-ng-options='item as item for item in itemsCT'>
+												<option value="" selected>-- Select --</option>
+											</select> </label>
+									</div>
+									<div class="list" ng-show="radio.controllerType == '0'">
+										<label ng-class="isInvalid('ticketform.u_controller_type_correction') ? 'has-error' : 'has-success'" class="item item-select item-select-break">
+											<div class="New Controller Type">
+												New Controller Type
+											</div> <!-- <input data-ng-model='ticketform.u_controller_type_correction' type="text" placeholder="Type"> -->
+											<select data-ng-model='ticketform.u_controller_type_correction' ng-options="option.value as option.label for option in controllerval">
+												<option value="" selected>-- Select --</option>
+											</select> </label>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row responsive-lg">
+						<div class="col">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Asset Type
+								</div>
+								<select disabled="disabled" ng-change='onAssetTypeChange()' data-ng-model='ticketform.u_asset_type' data-ng-options='item as item for item in itemsATYP'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Asset Number
+								</div>
+								<select disabled="disabled"  ng-change='onAssetNumberChange()' data-ng-model='ticketform.u_asset_number' data-ng-options='item as item for item in itemsANUM'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+					</div>
+
+					<div class="row responsive-lg" style="margin-bottom:0px; padding-bottom:0px;">
+						<div class="col" style="max-width:100%; float:none; margin-bottom:0px; padding-bottom:0px;">
+							<div class="list card removeanypadding">
+								<div class="item lightGreyBg">
+									<h3>Add Serial Numbers</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row responsive-lg" style="margin-top:0px;">
+						<div class="col" style="padding-top:0px; margin-top:0px; padding-bottom:0px; margin-bottom:0px;">
+							<label class="item item-radio"> <!--<input ng-if="ticketform.u_cam_serial_number.length > 0" id="sertialTypeCorrection" ng-model="radio.serialType" value="0"  type="radio" name="group4" ng-click="serialCorrection()">-->
+								<input ng-disabled="!ticketform.u_asset_number.length > 0" id="sertialTypeCorrection" ng-model="radio.serialType" value="0"  type="radio" name="group4" ng-click="serialCorrection()">
+								<div class="item-content">
+									Correction
+								</div> <i class="radio-icon ion-checkmark"></i> </label>
+						</div>
+						<div class="col" style="padding-top:0px; margin-top:0px; padding-bottom:0px; margin-bottom:0px;">
+							<label class="item item-radio">
+								<input id="controllerTypeCurrentRadio" ng-model="radio.serialType" value="1" type="radio"  name="group4">
+								<div class="item-content">
+									Current
+								</div> <i class="radio-icon ion-checkmark"></i> </label>
+
+						</div>
+					</div>
+
+					<div class="row responsive-lg" style="padding-bottom:0px;">
+						<div class="col" style="padding-top:0px" ng-class="{'notMandatory': isNotMandatoryCAM}">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Electronics Serial No
+								</div>
+								<select ng-disabled="!itemsCSM || itemsCSM.length<=0 || itemsCSM.length == 0" ng-change='onCamElectronicsSerialChange()' data-ng-model='ticketform.u_cam_serial_number' data-ng-options='item as item for item in itemsCSM'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+
+							<div ng-show="radio.serialType == '0'">
+								<div class="list">
+									<label class="item item-input item-stacked-label"> <span class="input-label">New Electronics Serial No</span>
+										<input type="tel" data-ng-model='ticketform.u_cam_serial_number_new'  maxlength="8">
+									</label>
+								</div>
+							</div>
+
+						</div>
+						<div class="col" style="padding-top:0px" ng-class="{'notMandatory': isNotMandatoryFLUID}">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Fluidics Serial No
+								</div>
+								<select ng-disabled="!itemsFSM || itemsFSM.length<=0 || itemsFSM.length == 0" data-ng-model='ticketform.u_fluidics_serial_number' ng-change='onFluidicsSerialNumberChange()' data-ng-options='item as item for item in itemsFSM'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+							<div ng-show="radio.serialType == '0'">
+								<div class="list">
+									<label class="item item-input item-stacked-label"> <span class="input-label">New Fluidics Serial No</span>
+										<input type="tel" data-ng-model='ticketform.u_fluidics_serial_number_new'  maxlength="8">
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row responsive-lg">
+
+						<div class="col" ng-class="{'notMandatory': isNotMandatoryController}">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Controller Serial No
+								</div>
+								<select ng-disabled="!itemsCSD || itemsCSD.length<=0 || itemsCSD.length == 0" data-ng-model='ticketform.u_controller_serial_id' ng-change='onControllerSerialChange()' data-ng-options='item as item for item in itemsCSD'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+							<div ng-show="radio.serialType == '0'">
+								<div class="list">
+									<label class="item item-input item-stacked-label"> <span class="input-label">New Controller Serial No</span>
+										<input type="tel" data-ng-model='ticketform.u_controller_serial_id_new'  maxlength="8">
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col" ng-class="{'notMandatory': isNotMandatorySKID}">
+							<label class="item item-input item-select item-select-break">
+								<div class="input-label">
+									ICC Skid Serial No
+								</div>
+								<select ng-disabled="!itemsICCSS || itemsICCSS.length<=0 || itemsICCSS.length == 0" data-ng-model='ticketform.u_icc_skid_serial_number' data-ng-options='item as item for item in itemsICCSS'  ng-change='onIccSkidSerialChange()'>
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+							<div ng-show="radio.serialType == '0'">
+								<div class="list">
+									<label class="item item-input item-stacked-label"> <span class="input-label">New ICC Skid Serial No</span>
+										<input type="tel" data-ng-model='ticketform.u_icc_skid_serial_number_new' maxlength="8">
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="margin30" align="center">
+				<div class="row">
+					<div class="col">
+						<button type="submit" ng-click="ticketSubmit()" class="button button-small button-positive button-same-size">
+							Submit
+						</button>
+						<button ng-click="ticketCancel()" class="button button-small button-positive button-same-size">
+							Cancel
+						</button>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>
+

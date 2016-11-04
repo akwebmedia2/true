@@ -1,0 +1,259 @@
+﻿<ion-view>
+	<ion-content has-header="true" delegate-handle="myScroll" padding="true">
+		<div id="openTicketCheckPhone" class="show-for-small-down"></div>
+
+		<form name="newticketform" id="newticketform" novalidate="novalidate"  on-valid-submit="doLogin()" class="marginTop0">
+			<div class="list">
+				<div class="item item-form-divider item-icon-right" ng-init="show_section.ticketinformation = true" ng-click="section_click('ticketinformation')">
+					<h2>Extend CR</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.ticketinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.ticketinformation"></i>
+				</div>
+				<div ng-show="show_section.ticketinformation" class="item removeanypadding">
+
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Number</span>
+								<input ng-model="extendedData.number" type="text" readonly />
+							</label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Stage</span>
+								<input ng-model="extendedData.u_stage" type="text" readonly="" />
+							</label>
+						</div>
+					</div><!--End of Row -->
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label removeBoldFont">Assignment Group</span>
+								<input type="text" ng-model="extendedData['assignment_group.name']" readonly="">
+							</label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Opened by</span>
+								<input ng-model="extendedData['opened_by.name']" type="text" readonly="readonly" ng-if="disableAll" />
+								<input ng-model="extendedData.opened_by" type="text" readonly="readonly" ng-if="!disableAll" />
+							</label>
+
+						</div>
+
+					</div>
+
+					<div class="row responsive-md">
+                    <div class="col">
+							<label ng-class="isInvalidShip('extendedData.u_ship_to') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Ship To</span>
+								<input ng-model="extendedData.u_ship_to" type="text" ng-disabled="disableAll"  ng-blur="shiptovalidate(extendedData.u_ship_to)" my-maxlength="5" id="shipTo" />
+							</label>
+						</div>
+						<div class="col">
+
+							<label ng-class="isInvalid('extendedData.u_sold_to__') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Sold To #</span>
+								<input ng-model="extendedData.u_sold_to__" type="text" ng-disabled="disableAll" maxlength="40" />
+							</label>
+						</div>
+						
+					</div>
+					<div class="row responsive-md">
+                    <div class="col">
+							<label ng-class="isInvalid('extendedData.u_account_name') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">Account Name</span>
+								<input ng-model="extendedData.u_account_name" type="text" ng-disabled="disableAll"  maxlength="40" />
+							</label>
+						</div>
+                    
+                    <div class="col">
+							<label ng-class="isInvalid('extendedData.u_city') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">City</span>
+								<input ng-model="extendedData.u_city" type="text" ng-disabled="disableAll" maxlength="40" />
+							</label>
+
+						</div>
+                    </div>
+                    <div class="row responsive-md">
+                    <div class="col">
+							<label class="item item-input item-select item-select-break" ng-disabled="disableAll">
+								<div class="input-label">
+									State
+								</div>
+								<select ng-model="extendedData.u_state" ng-options="option.State as option.State for option in statesList  | orderBy:'State'"  ng-disabled="disableAll" >
+									<option value="" selected>-- Select --</option>
+
+								</select> </label>
+						</div>
+                    
+                    
+						<div class="col">
+							<label ng-class="isInvalid('extendedData.u_country') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Country
+								</div>
+								<select  ng-model="extendedData.u_country" ng-options="option.value as option.label for option in countryList  | orderBy:'country'" ng-disabled="disableAll">
+									<option value="" selected>-- Select --</option>
+
+								</select> </label>
+						</div>
+                        </div>
+                        <div class="row responsive-md">
+						<div class="col">
+							<label ng-class="isInvalid('extendedData.u_pole') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Pole
+								</div>
+								<select ng-model="extendedData.u_pole" ng-options="option.value as option.label for option in poleList" ng-disabled="disableAll">
+									<option value="" selected>-- Select --</option>
+
+								</select> </label>
+
+						</div>
+                        
+                        	<div class="col">
+							<label ng-class="isInvalid('extendedData.u_system_name') ? 'has-error' : 'has-success'" class="item item-input item-stacked-label"> <span class="input-label">System Name</span>
+								<input ng-model="extendedData.u_system_name" type="text" ng-disabled="disableAll" maxlength="40" />
+							</label>
+						</div>
+                        
+					</div>
+					
+					<div class="row responsive-md">		
+
+						<div class="col">
+							<label ng-class="isInvalid('extendedData.u_asset_type') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Asset Type
+								</div>
+								<select ng-model="extendedData.u_asset_type" ng-options="option.value as option.label for option in assetType" ng-disabled="disableAll">
+									<option value="" selected>-- Select --</option>
+
+								</select> </label>
+						</div>
+					</div>
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Electronics Serial No.</span>
+								<input ng-model="extendedData.u_cam_electronics_serial_no" type="tel" maxlength="8" ng-disabled="disableAll" />
+							</label>
+						</div>
+						<div class="col">
+
+							<label class="item item-input item-stacked-label"> <span class="input-label">Fluidics Serial No.</span>
+								<input ng-model="extendedData.u_fluidics_serial_no" type="tel" maxlength="8" ng-disabled="disableAll" />
+							</label>
+						</div>
+					</div>
+
+					<div class="row responsive-md">
+						<div class="col">
+
+							<label class="item item-input item-stacked-label"> <span class="input-label">Controller Serial No.</span>
+								<input ng-model="extendedData.u_controller_serial_id" type="tel" maxlength="8" ng-disabled="disableAll" />
+							</label>
+						</div>
+						<div class="col">
+
+							<label class="item item-input item-stacked-label"> <span class="input-label">ICC Skid Serial No.</span>
+								<input ng-model="extendedData.u_icc_skid_serial_no" type="tel" maxlength="8" ng-disabled="disableAll" />
+							</label>
+						</div>
+					</div>
+					<div class="row responsive-md">
+						<div class="col">
+							<label ng-class="isInvalid('extendedData.u_operational_status') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Operational Status
+								</div>
+								<select ng-model="extendedData.u_operational_status" ng-options="option.value as option.label for option in operationalVal" ng-disabled="disableAll">
+									<option value="" selected>-- Select --</option>
+								</select> </label>
+						</div>
+						<div class="col">
+							<label ng-class="isInvalid('extendedData.u_controller_type') ? 'has-error' : 'has-success'" class="item item-input item-select item-select-break">
+								<div class="input-label">
+									Controller Type
+								</div>
+								<select ng-model="extendedData.u_controller_type" ng-options="option.value as option.label for option in controllerval | orderBy:['label']" ng-disabled="disableAll">
+									<option value="" selected>-- Select --</option>
+
+								</select> </label>
+						</div>
+					</div>
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">GE SAP PO #</span>
+								<input ng-model="extendedData.u_ge_sap_po__" type="text" ng-disabled="disableAll"  maxlength="40" />
+							</label>
+						</div>
+						
+					</div>
+
+					<div class="row responsive-md">
+						<div class="col">
+							<div class="item-checkbox" style="border:none; padding-left:0">
+								
+                                
+                                <label class="item item-input item-select item-select-break"> <span class="input-label removeBoldFont">Cooler Option</span>
+						<select ng-model="extendedData.u_cooler" ng-disabled="disableAll">
+							<option value="">-- Select --</option>
+							<option value="no">No</option>
+                            <option value="yes">Yes Original</option>
+                            <option value="retrofit">Yes with Retrofit</option>
+						</select> <!-- <input ng-readonly="!accessibility.enable_account_hierarchy_edit" ng-model="details.u_fluidic_cooler_option" type="text"> --> </label>
+                                
+                                
+							</div>
+						</div>
+                        <div class="col">
+                        </div>
+
+					</div>
+
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Short Description</span> 								<textarea ng-model="extendedData.u_short_description" ng-disabled="disableAll" rows="4"  maxlength="100"></textarea> </label>
+						</div>
+					</div><!--End of Row -->
+
+				</div>
+
+				<div class="sep"></div>
+				<div class="item item-form-divider item-icon-right" ng-click="section_click('defectinformation')">
+					<h2>Reference Data</h2>
+					<i class="icon ion-ios7-plus-outline" ng-hide="show_section.defectinformation"></i><i class="icon ion-ios7-minus-outline" ng-show="show_section.defectinformation"></i>
+				</div>
+
+				<div ng-show="show_section.defectinformation" class="item removeanypadding">
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Transfer Date</span>
+								<input ng-model="extendedData.u_transfer_date" type="date" ng-disabled="disableAll" />
+							</label>
+						</div>
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">Asset No</span>
+								<input ng-model="extendedData.u_asset_no" type="text" ng-disabled="disableAll"  maxlength="40" />
+							</label>
+						</div>
+					</div><!--End of Row -->
+					<div class="row responsive-md">
+						<div class="col">
+							<label class="item item-input item-stacked-label"> <span class="input-label">WBS No</span>
+								<input ng-model="extendedData.u_wbs_no" type="text" ng-disabled="disableAll"  maxlength="40" />
+							</label>
+						</div>
+
+					</div><!--End of Row -->
+				</div>
+
+				<div class="sep"></div>
+			</div>
+			<div class="margin30" align="center" ng-hide="disableAll">
+				<div class="row">
+					<div class="col">
+						<button type="submit" ng-click="ticketSubmit()"  class="button button-small button-positive" style="padding:7px;">
+							Submit for Execution
+						</button>
+						<button ng-click="ticketCancel()" class="button button-small button-positive button-same-size">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

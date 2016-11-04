@@ -1,0 +1,40 @@
+﻿<ion-view title="Pin Code" ng-init="init()">
+	<ion-content has-header="false" has-tabs="false" padding="false" class="loginContainer">
+		<div class="row text-center">
+			<div class="col ">
+				<img src="img/ge-logo.png" width="80" />
+				<br>
+				<h4>TrueSense</h4>
+			</div>
+		</div>
+		<div class="marginTop20" align="center">
+			<h5>Enter Your Passcode</h5>
+			<h5 class="pinErrorMsg" ng-bind="pinwrong" ng-if="pinwrong !=''"></h5>
+		</div>
+		<div class="pinLoginCon">
+			<div class="row padding">
+				<div class="col">
+					<label class="item item-input">
+						<input type="password" maxlength="4" pattern="[0-9]*" inputmode="numeric"  ng-model="$parent.passcode" />
+					</label>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col width80Per">
+					<button class="button button-full button-positive" ng-click="loginWithPIN()">
+						Login
+					</button>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+<style type="text/css">
+	@media only screen and(min-width:641px) {/* for Tablet*/
+		body {
+			background:white;
+		}
+	}
+</style>
+

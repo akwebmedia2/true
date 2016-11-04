@@ -1,0 +1,173 @@
+﻿<!-- <script id="templates/homelanding.html" type="text/ng-template"> -->
+<ion-view> 
+	<ion-content id="MainMenuForPhone" class="show-for-small-down" delegate-handle="myScroll">
+		<div align="center">
+        <div class="row">
+        <div class="col" style="text-align:left; border:0px solid #fff">
+        	Current Country Code: <span ng-if="usersCountryCode">{{usersCountryCode}}</span> <span ng-if="!usersCountryCode">All</span>
+            </div>
+        </div>
+			<div class="row">
+				<div class="col">
+					<a href="#/event/openticket" class="item" menu-close> <img src="img/new-ticket.png"  height="70" /> <h3>Create New Ticket</h3> </a>
+				</div>
+                <div class="col">
+					<a href="#/event/myopenticketphone" class="item" menu-close> <img src="img/open-ticket.png"  height="70" /> <h3>My Open Tickets</h3> </a>
+				</div>				
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<a href="#/event/logissue" class="item" menu-close> <img src="img/log-ticket.png"  height="70" /> <h3>Log an Issue</h3> </a>
+				</div>  
+                 <div class="col">
+					<a href="#/event/closedticket" class="item" menu-close> <img src="img/close-ticket.png"  height="70" /> <h3>Closed Tickets</h3> </a>
+				</div>
+                             
+               
+				
+			</div>
+
+			<div class="row">
+               <div class="col">
+					<a href="#/event/servicereport" class="item" menu-close> <img src="img/create-report.png"  height="70" /> <h3>Create Service Report</h3> </a>
+				</div>    
+                   <div class="col">
+					<a href="#/event/myservicereport" class="item" menu-close> <img src="img/service-report.png"  height="70" /> <h3>My Service Reports</h3> </a>
+				</div>    
+           
+           
+			</div>
+            <div class="row">
+             <div class="col">
+					<a href="#/event/ordersparepart" class="item" menu-close> <img src="img/order-spare.png"  height="70" /> <h3>Order Spare Part</h3> </a>
+				</div>
+                 <div class="col">
+					<a href="#/event/myordersparepart" class="item" menu-close> <img src="img/my-orders.png"  height="70" /> <h3>My Orders</h3> </a>
+				</div>
+             
+            
+ 			
+			
+           
+			</div>
+            <div class="row">
+             <div class="col">
+					<a href="#/event/correctaccount" class="item" menu-close> <img src="img/correction.png"  height="70" /> <h3>Correct Account/Asset</h3> </a>
+				</div>
+             <div class="col">
+					<a href="#/event/newaccountasset" class="item" menu-close> <img src="img/new-asset.png"  height="70" /> <h3>New Account/Asset</h3> </a>
+				</div>
+           
+            
+				
+				
+			
+					
+				
+			</div>
+            <div class="row">
+             <div class="col">
+					<a href="#/event/openaccountasset" class="item" menu-close> <img src="img/open-asset.png"  height="70" /> <h3>My Open Account/Asset</h3> </a>
+				</div>
+             <div class="col">
+					<a href="#/event/groupassignedticket" class="item" menu-close> <img src="img/group-ticket.png"  height="70" /> <h3>Group Assigned Tickets</h3> </a>
+				</div>
+          
+				
+			
+			</div>
+            
+             <div class="row">
+               <div class="col">
+					<a href="#/event/accounthierarchy" class="item" menu-close> <img src="img/hierarchy.png"  height="70" /> <h3>Account Hierarchy</h3> </a>
+				</div>
+             <div class="col">
+					<a href="#/event/settings" class="item" menu-close> <img src="img/setting.png"  height="70" /> <h3>Settings</h3> </a>
+				</div>
+           
+            
+		</div>
+        <div class="row">
+        	
+            <div class="col">
+					<a href="#/event/feedback" class="item" menu-close> <img src="img/feedback.png"  height="70" /> <h3>Feedback</h3> </a>
+				</div>
+			</div>
+        </div>
+	</ion-content>
+	<ion-tabs class="tabs-only tabs-top tabs-dark show-for-small-up hide-for-small-down">
+		<ion-tab padding='true' title="Current Tickets">
+			<header class="bar bar-header bar-positive">
+				<h1 class="title">Current Tickets</h1>
+			</header>
+			<ion-content padding="true" has-header="true">
+				<div class="list">
+					<div class="item item-input-inset">
+						<div class="item-input-wrapper">
+							<input type="search"
+							placeholder="Filter/Search items..."
+							ng-model="$parent.search">
+						</div>
+					</div>
+					<ion-item ng-click="ticketDetailsPage(completedItem,'uploaded')" class="removeanypadding paddingTen" ng-repeat="completedItem in (updatedRecord = (completedItems | filter:search | orderBy: '-opened_at'))">
+						<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b> {{ completedItem.number }}</h3> <h3 class="width80Per"><b>Account Name: </b> {{ completedItem.u_account_name }}</h3> <h3 class="width80Per"><b>Short Description: </b> {{ completedItem.u_short_description }}</h3> <h3><b>Opened At (GMT): </b> {{ completedItem.opened_at }}</h3> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+					</ion-item>
+					<ion-item ng-if="updatedRecord.length == 0">
+						<strong>No ticket found...</strong>
+					</ion-item>
+				</div>
+			</ion-content>
+		</ion-tab>
+		<ion-tab padding='true' title="Pending Tickets">
+			<header class="bar bar-header bar-positive">
+				<h1 class="title">Pending Tickets</h1>
+			</header>
+			<ion-content padding="true" has-header="true">
+				<div class="list">
+					<div class="item item-input-inset">
+						<div class="item-input-wrapper">
+							<input type="search"
+							placeholder="Filter/Search items..."
+							ng-model="$parent.search">
+						</div>
+					</div>
+					<ion-item ng-click="ticketDetailsPage(pendingItem,'pending')" class="removeanypadding paddingTen" ng-repeat="pendingItem in (pengingList = (pendingItemsNonGroup | filter:search))">
+						<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b><span ng-if="pendingItem.number" ng-bind='pendingItem.number'></span><span ng-if="!pendingItem.number">Not Generated</span></h3> <h3><b>Account Name: </b> {{ pendingItem.u_account_name }}</h3> <h3><b>Short Description: </b> {{ pendingItem.u_short_description }}</h3> <!-- <h3><b>Opened At : </b> {{ pendingItem.savedTS }}</h3>  --> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+					</ion-item>
+					<ion-item ng-if="pengingList.length == 0">
+						<strong>No ticket found...</strong>
+					</ion-item>
+				</div>
+			</ion-content>
+		</ion-tab>
+		
+		<ion-tab padding='true' title="Pending Spare Part">
+			<header class="bar bar-header bar-positive">
+				<h1 class="title">Pending Spare Part</h1>
+			</header>
+			<ion-content padding="true" has-header="true">
+				<div class="list">
+					<div class="item item-input-inset">
+						<div class="item-input-wrapper">
+							<input type="search"
+							placeholder="Filter/Search items..."
+							ng-model="$parent.osp_search">
+						</div>
+					</div>
+					<ion-item ng-click="sparePartPage(pendingSPItem)" class="removeanypadding paddingTen" ng-repeat="pendingSPItem in (pengingSPList = (pendingSPItems | filter:osp_search))">
+						<a class=" my-item item-icon-right removeanypadding"> <h3><b>Ticket Number: </b><span ng-if="pendingSPItem.number" ng-bind='pendingSPItem.number'></span><span ng-if="!pendingSPItem.number">Not Generated</span></h3> <h3><b>Order Number for Spare Part: </b> <span ng-if="pendingSPItem.spare_number" ng-bind='pendingSPItem.spare_number'></span><span ng-if="!pendingSPItem.spare_number">Not Generated</span></h3> <h3><b>Opened By: </b> {{ pendingSPItem.opened_by }}</h3> <h3><b>Ship To: </b> {{ pendingSPItem.u_ship_to }}</h3> <!-- <h3><b>Opened At : </b> {{ pendingSPItem.u_local_save_time }}</h3>  --> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+					</ion-item>
+                    <ion-item ng-click="orderPartPage(pendingSPItem)" class="removeanypadding paddingTen" ng-repeat="pendingSPItem in (pengingSPList = (pendingODRSPItems | filter:osp_search))">
+					<a class=" my-item item-icon-right removeanypadding">  <h3><b>Order Number for Spare Part: </b> <span>Not Generated</span></h3> <h3><b>Opened By: </b> {{ pendingSPItem.opened_by }}</h3> <h3><b>Ship To: </b> {{ pendingSPItem.u_ship_to }}</h3> <!-- <h3><b>Opened At : </b> {{ pendingSPItem.u_local_save_time }}</h3>  --> <i class="icon ion-chevron-right icon-accessory"></i> </a>
+				</ion-item>
+					<ion-item ng-if="pendingSPItems.length == 0 && pendingODRSPItems.length == 0">
+						<strong>No ticket found...</strong>
+					</ion-item>
+				</div>
+			</ion-content>
+		</ion-tab>
+	</ion-tabs>
+</ion-view>
+
+<!-- </script> -->
